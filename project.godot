@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Brainfart"
-run/main_scene="res://src/Main.tscn"
+run/main_scene="res://src/LevelManager.tscn"
 config/icon="res://icon.png"
 
 [gui]
