@@ -2,7 +2,7 @@ extends Control
 
 const listItem = preload("UI/ListItem.tscn")
 onready var list = $ItemList
-onready var level = get_node("/root/Main/Level1")
+onready var level = get_node("/root/LevelManager/CurrentLevelContainer/Level01/Level1")
 
 var listIndex = 0
 
