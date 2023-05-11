@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://src/environment/Environment.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
+[ext_resource path="res://src/levels/Level1.tscn" type="PackedScene" id=12]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -65,5 +66,7 @@ margin_right = 122.0
 margin_bottom = 59.0
 text = "tiempo"
 script = ExtResource( 4 )
+
+[node name="Level1" parent="." instance=ExtResource( 12 )]
 
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
