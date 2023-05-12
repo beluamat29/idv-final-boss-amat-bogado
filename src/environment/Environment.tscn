@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=2]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/environment/TaskList.gd" type="Script" id=4]
 [ext_resource path="res://src/environment/ItemList.gd" type="Script" id=5]
-[ext_resource path="res://src/environment/Control.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 511, 23.5 )
@@ -47,15 +46,3 @@ margin_right = 146.0
 margin_bottom = 210.0
 mouse_filter = 2
 script = ExtResource( 5 )
-
-[node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 6 )
-stress_bar_path = NodePath("TextureProgress")
-
-[node name="TextureProgress" type="TextureProgress" parent="Control"]
-margin_left = 403.0
-margin_top = 6.0
-margin_right = 675.0
-margin_bottom = 46.0

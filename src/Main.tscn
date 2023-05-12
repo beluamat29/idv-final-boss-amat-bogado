@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://src/environment/Environment.tscn" type="PackedScene" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
 [ext_resource path="res://src/levels/Level1.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Fridge.gd" type="Script" id=13]
+[ext_resource path="res://assets/textures/environment/barra_completa.png" type="Texture" id=14]
+[ext_resource path="res://src/environment/Control.gd" type="Script" id=15]
+[ext_resource path="res://assets/textures/environment/barra_vacia.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 168.994, 244.87 )
@@ -119,7 +122,23 @@ script = ExtResource( 4 )
 
 [node name="Level1" parent="." instance=ExtResource( 12 )]
 
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 15 )
+stress_bar_path = NodePath("TextureProgress")
+
+[node name="TextureProgress" type="TextureProgress" parent="Control"]
+margin_left = 403.0
+margin_top = 6.0
+margin_right = 675.0
+margin_bottom = 28.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 14 )
+nine_patch_stretch = true
+
 [connection signal="input_event" from="Environment/Furniture/Kitchen" to="." method="_on_Kitchen_input_event"]
 [connection signal="input_event" from="Environment/Furniture/Desk" to="." method="_on_Desk_input_event"]
 [connection signal="input_event" from="Environment/Furniture/Plant" to="." method="_on_Plant_input_event"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
+[connection signal="timeout" from="Time/Countdown" to="Control" method="_on_Countdown_timeout"]
