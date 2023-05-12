@@ -15,5 +15,6 @@ func _on_Countdown_timeout():
 		tiempoTotal -= 1
 		update_label(tiempoTotal)
 	else:
-		print('juego terminado')	
-	
+		get_tree().paused = true
+		print("Perdiste :(")
+		
