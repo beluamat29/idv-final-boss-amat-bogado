@@ -30,7 +30,7 @@ height = 173.93
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 181.527, 243.81 )
 
-[node name="Main" type="Node"]
+[node name="Level01" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Environment" parent="." instance=ExtResource( 2 )]

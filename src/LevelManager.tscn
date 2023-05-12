@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/textures/environment/pause-button.png" type="Texture" id=1]
+[ext_resource path="res://src/Main.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Control.gd" type="Script" id=3]
+[ext_resource path="res://src/LevelManager.gd" type="Script" id=4]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource( 4 )
+level = ExtResource( 2 )
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+script = ExtResource( 3 )
+
+[node name="MenuButton" type="TextureButton" parent="Canvas"]
+margin_left = 968.0
+margin_top = 12.0
+margin_right = 995.0
+margin_bottom = 38.0
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="PopupPanel" type="PopupMenu" parent="Canvas"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -170.0
+margin_right = 122.0
+margin_bottom = 107.0
+
+[node name="Restart" type="Button" parent="Canvas/PopupPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = 21.5
+margin_right = 96.0
+margin_bottom = 47.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Restart"
+icon_align = 1
+expand_icon = true
+
+[node name="Resume" type="Button" parent="Canvas/PopupPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -12.5
+margin_right = 96.0
+margin_bottom = 12.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Resume"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/PopupPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.5
+margin_top = -89.5
+margin_right = 24.5
+margin_bottom = -56.5
+text = "Paused"
+
+[node name="CurrentLevelContainer" type="Node" parent="."]
+
+[connection signal="restart_level" from="Canvas" to="." method="_on_Canvas_restart_level"]
+[connection signal="pressed" from="Canvas/MenuButton" to="Canvas" method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="Canvas/PopupPanel/Restart" to="Canvas" method="_on_Restart_pressed"]
+[connection signal="pressed" from="Canvas/PopupPanel/Resume" to="Canvas" method="_on_Resume_pressed"]
