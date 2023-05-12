@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/barra_vacia.png-c12a5b3691b023c0663a4f449e15834c.stex"
+path="res://.import/full_bar.png-03c37fda601eb71e33c339bdca509d92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/environment/barra_vacia.png"
-dest_files=[ "res://.import/barra_vacia.png-c12a5b3691b023c0663a4f449e15834c.stex" ]
+source_file="res://assets/textures/environment/full_bar.png"
+dest_files=[ "res://.import/full_bar.png-03c37fda601eb71e33c339bdca509d92.stex" ]
 
 [params]
 

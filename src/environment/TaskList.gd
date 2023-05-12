@@ -3,12 +3,12 @@ extends Control
 const listItem = preload("UI/ListItem.tscn")
 
 onready var list = $ItemsList
-onready var level = get_node("/root/Level01")
+onready var level = get_node("/root/LevelManager/CurrentLevelContainer/Level01")
 
 var listIndex = 0
 
 func _ready():
-	var tasks = [["Regar planta", 0], ["Asistir a la reunion de las 10:00 am", 1], ["Cocinar", 2]]
+	var tasks = level.getTasksList()
 	for task in tasks:
 		addItem(task)
 	
