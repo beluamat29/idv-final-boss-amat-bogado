@@ -7,13 +7,10 @@ func _ready():
 	level.initialize()
 
 func getTasksList():
-	print(level)
-	return level.getTasksList()
+		return [["Regar planta", 0], ["Asistir a la reunion de las 10:00 am", 1], ["Cocinar", 2]]
 
 func objectWasPressed(objectId):
 	tasksList.objectWasPressed(objectId)
-	
-
 
 func _on_Kitchen_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
