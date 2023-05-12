@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://src/environment/Environment.tscn" type="PackedScene" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
 [ext_resource path="res://src/levels/Level1.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Fridge.gd" type="Script" id=13]
-[ext_resource path="res://src/Kitchen.gd" type="Script" id=14]
-[ext_resource path="res://src/Desk.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 168.994, 244.87 )
@@ -56,7 +54,6 @@ shape = SubResource( 1 )
 [node name="Kitchen" type="Area2D" parent="Environment/Furniture"]
 position = Vector2( 737, 463 )
 scale = Vector2( 0.453125, 0.417969 )
-script = ExtResource( 14 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Furniture/Kitchen"]
 texture = ExtResource( 8 )
@@ -68,7 +65,6 @@ shape = SubResource( 2 )
 [node name="Desk" type="Area2D" parent="Environment/Furniture"]
 position = Vector2( 128, 472 )
 scale = Vector2( 0.408203, 0.398438 )
-script = ExtResource( 15 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Furniture/Desk"]
 texture = ExtResource( 7 )
@@ -123,4 +119,7 @@ script = ExtResource( 4 )
 
 [node name="Level1" parent="." instance=ExtResource( 12 )]
 
+[connection signal="input_event" from="Environment/Furniture/Kitchen" to="." method="_on_Kitchen_input_event"]
+[connection signal="input_event" from="Environment/Furniture/Desk" to="." method="_on_Desk_input_event"]
+[connection signal="input_event" from="Environment/Furniture/Plant" to="." method="_on_Plant_input_event"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]

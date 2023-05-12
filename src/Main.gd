@@ -13,3 +13,18 @@ func getTasksList():
 func objectWasPressed(objectId):
 	tasksList.objectWasPressed(objectId)
 	
+
+
+func _on_Kitchen_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		objectWasPressed(2)
+
+
+func _on_Desk_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		objectWasPressed(1)
+
+
+func _on_Plant_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		objectWasPressed(0)
