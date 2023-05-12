@@ -70,7 +70,6 @@ text = "Paused"
 
 [node name="CurrentLevelContainer" type="Node" parent="."]
 
-[connection signal="restart_level" from="Canvas" to="." method="_on_Canvas_restart_level"]
 [connection signal="pressed" from="Canvas/MenuButton" to="Canvas" method="_on_MenuButton_pressed"]
 [connection signal="pressed" from="Canvas/PopupPanel/Restart" to="Canvas" method="_on_Restart_pressed"]
 [connection signal="pressed" from="Canvas/PopupPanel/Resume" to="Canvas" method="_on_Resume_pressed"]
