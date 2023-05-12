@@ -12,14 +12,8 @@ extents = Vector2( 511, 23.5 )
 [node name="Environment" type="Node"]
 
 [node name="Background" type="TextureRect" parent="."]
-anchor_left = 0.417
-anchor_top = 0.137
-anchor_right = 0.417
-anchor_bottom = 0.137
-margin_left = -427.008
-margin_top = -82.2
-margin_right = 592.992
-margin_bottom = 517.8
+margin_right = 1020.0
+margin_bottom = 600.0
 mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
