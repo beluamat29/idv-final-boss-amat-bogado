@@ -1,7 +1,5 @@
 extends Control
 
-const listItem = preload("UI/ListItem.tscn")
-
 onready var list = $ItemsList
 onready var level = get_node("/root/LevelManager/CurrentLevelContainer/Level01")
 

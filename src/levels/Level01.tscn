@@ -1,22 +1,21 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://src/Main.gd" type="Script" id=1]
-[ext_resource path="res://src/environment/ItemList.gd" type="Script" id=2]
+[ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/TimeLeft.gd" type="Script" id=4]
-[ext_resource path="res://src/Time.gd" type="Script" id=5]
+[ext_resource path="res://src/UI/Time.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/environment/furniture/computer.png" type="Texture" id=7]
 [ext_resource path="res://assets/textures/environment/furniture/kitchen.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
-[ext_resource path="res://src/Fridge.gd" type="Script" id=13]
+[ext_resource path="res://src/environment/Fridge.gd" type="Script" id=13]
 [ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=14]
-[ext_resource path="res://src/environment/Control.gd" type="Script" id=15]
+[ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/empty_bar.png" type="Texture" id=16]
 [ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=17]
-[ext_resource path="res://src/environment/TaskList.gd" type="Script" id=18]
+[ext_resource path="res://src/UI/TaskList.gd" type="Script" id=18]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=19]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=20]
 
@@ -38,6 +37,11 @@ height = 173.93
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 181.527, 243.81 )
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Label
+
+"
 
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
@@ -148,7 +152,7 @@ margin_top = 2.0
 margin_right = 122.0
 margin_bottom = 59.0
 text = "tiempo"
-script = ExtResource( 4 )
+script = SubResource( 7 )
 
 [node name="StressBar" type="Control" parent="."]
 margin_right = 40.0
