@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/background.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Default-Big.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/LevelManager.tscn" type="PackedScene" id=4]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 500.0 ]
+}
+level_manager = ExtResource( 4 )
+
+[node name="Container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Title" type="Label" parent="Container"]
+anchor_right = 1.0
+margin_top = 123.0
+margin_bottom = 183.0
+custom_fonts/font = ExtResource( 3 )
+text = "Brainfart"
+align = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 400.0
+margin_right = -400.0
+alignment = 1
+
+[node name="StartButton" type="Button" parent="Container/Buttons"]
+margin_top = 278.0
+margin_right = 224.0
+margin_bottom = 298.0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+text = "Start"
+icon_align = 1
+
+[node name="ExitButton" type="Button" parent="Container/Buttons"]
+margin_top = 302.0
+margin_right = 224.0
+margin_bottom = 322.0
+text = "Exit"
+
+[connection signal="pressed" from="Container/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Container/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]

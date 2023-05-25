@@ -3,6 +3,8 @@ extends VBoxContainer
 const listItemScene = preload("UI/ListItem.tscn")
 onready var tasksList:Array = []
 
+signal victory
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +32,5 @@ func checkIfWin():
 		win = win && task[2]
 	
 	if win:
-		get_tree().paused = true
-		print('ganaste')	
+		emit_signal("victory")
 	
