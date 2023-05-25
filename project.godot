@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "Level1",
-"language": "GDScript",
-"path": "res://src/levels/Level1.gd"
-} ]
-_global_script_class_icons={
-"Level1": ""
-}
-
 [application]
 
 config/name="Brainfart"

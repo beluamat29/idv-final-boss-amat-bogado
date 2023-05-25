@@ -1,10 +1,9 @@
 extends VBoxContainer
 
-const listItemScene = preload("UI/ListItem.tscn")
+const listItemScene = preload("ListItem.tscn")
 onready var tasksList:Array = []
 
 signal victory
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
