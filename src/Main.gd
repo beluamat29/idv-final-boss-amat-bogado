@@ -1,10 +1,9 @@
 extends Node
 
-onready var level = $Level1
-onready var tasksList = $Environment/TaskList/ItemsList
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	level.initialize()
+onready var tasksList = $TaskList/ItemsList
+
+signal victory
+signal game_over
 
 func getTasksList():
 		return [["Regar planta", 0], ["Asistir a la reunion de las 10:00 am", 1], ["Cocinar", 2]]
@@ -26,3 +25,13 @@ func _on_Plant_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		objectWasPressed(0)
 	
+
+
+func _on_ItemsList_victory():
+	emit_signal("victory")
+
+func _on_Time_game_over():
+	emit_signal("game_over")
+
+func _on_StressBar_game_over():
+	emit_signal("game_over")

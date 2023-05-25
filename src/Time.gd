@@ -3,6 +3,8 @@ extends Node
 var tiempoTotal = 300 #segundos
 onready var label:Label = $TimeLeft
 
+signal game_over
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_label(tiempoTotal)
@@ -16,5 +18,5 @@ func _on_Countdown_timeout():
 		update_label(tiempoTotal)
 	else:
 		get_tree().paused = true
-		print("Perdiste :(")
+		emit_signal("game_over")
 		

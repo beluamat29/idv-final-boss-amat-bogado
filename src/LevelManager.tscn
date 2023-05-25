@@ -9,10 +9,10 @@
 script = ExtResource( 4 )
 level = ExtResource( 2 )
 
-[node name="Canvas" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
 
-[node name="MenuButton" type="TextureButton" parent="Canvas"]
+[node name="MenuButton" type="TextureButton" parent="UI"]
 margin_left = 968.0
 margin_top = 12.0
 margin_right = 995.0
@@ -20,18 +20,20 @@ margin_bottom = 38.0
 texture_normal = ExtResource( 1 )
 expand = true
 
-[node name="PopupPanel" type="PopupMenu" parent="Canvas"]
+[node name="Menus" type="Control" parent="UI"]
+
+[node name="PausePopup" type="PopupMenu" parent="UI/Menus"]
 pause_mode = 2
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -120.0
-margin_top = -170.0
-margin_right = 122.0
-margin_bottom = 107.0
+margin_top = -120.0
+margin_right = 120.0
+margin_bottom = 120.0
 
-[node name="Restart" type="Button" parent="Canvas/PopupPanel"]
+[node name="Restart" type="Button" parent="UI/Menus/PausePopup"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -45,7 +47,7 @@ text = "Restart"
 icon_align = 1
 expand_icon = true
 
-[node name="Resume" type="Button" parent="Canvas/PopupPanel"]
+[node name="Resume" type="Button" parent="UI/Menus/PausePopup"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -57,7 +59,7 @@ margin_bottom = 12.5
 rect_pivot_offset = Vector2( 94, 20.5 )
 text = "Resume"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/PopupPanel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Menus/PausePopup"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -68,9 +70,111 @@ margin_right = 24.5
 margin_bottom = -56.5
 text = "Paused"
 
+[node name="DefeatPopup" type="PopupMenu" parent="UI/Menus"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -120.0
+margin_right = 120.0
+margin_bottom = 120.0
+
+[node name="Restart" type="Button" parent="UI/Menus/DefeatPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -12.5
+margin_right = 96.0
+margin_bottom = 12.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Restart"
+
+[node name="Exit" type="Button" parent="UI/Menus/DefeatPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = 21.5
+margin_right = 96.0
+margin_bottom = 47.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Exit"
+icon_align = 1
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Menus/DefeatPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.5
+margin_top = -89.5
+margin_right = 24.5
+margin_bottom = -56.5
+text = "Defeat"
+
+[node name="VictoryPopup" type="PopupMenu" parent="UI/Menus"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -120.0
+margin_right = 120.0
+margin_bottom = 120.0
+
+[node name="Next" type="Button" parent="UI/Menus/VictoryPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -12.5
+margin_right = 96.0
+margin_bottom = 12.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Next"
+
+[node name="Exit" type="Button" parent="UI/Menus/VictoryPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = 21.5
+margin_right = 96.0
+margin_bottom = 47.5
+rect_pivot_offset = Vector2( 94, 20.5 )
+text = "Exit"
+icon_align = 1
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Menus/VictoryPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.5
+margin_top = -89.5
+margin_right = 24.5
+margin_bottom = -56.5
+text = "Victory"
+
 [node name="CurrentLevelContainer" type="Node" parent="."]
 
-[connection signal="restart_level" from="Canvas" to="." method="_on_Canvas_restart_level"]
-[connection signal="pressed" from="Canvas/MenuButton" to="Canvas" method="_on_MenuButton_pressed"]
-[connection signal="pressed" from="Canvas/PopupPanel/Restart" to="Canvas" method="_on_Restart_pressed"]
-[connection signal="pressed" from="Canvas/PopupPanel/Resume" to="Canvas" method="_on_Resume_pressed"]
+[connection signal="exit" from="UI" to="." method="_on_UI_exit"]
+[connection signal="restart_level" from="UI" to="." method="_on_UI_restart_level"]
+[connection signal="pressed" from="UI/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="UI/MenuButton" to="UI" method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="UI/Menus/PausePopup/Restart" to="UI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="UI/Menus/PausePopup/Resume" to="UI" method="_on_Resume_pressed"]
+[connection signal="pressed" from="UI/Menus/DefeatPopup/Restart" to="UI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="UI/Menus/DefeatPopup/Exit" to="UI" method="_on_Exit_pressed"]
+[connection signal="pressed" from="UI/Menus/VictoryPopup/Next" to="UI" method="_on_Next_pressed"]
+[connection signal="pressed" from="UI/Menus/VictoryPopup/Exit" to="UI" method="_on_Exit_pressed"]
