@@ -6,6 +6,5 @@ var tasks: Array = []
 func _ready():
 	pass # Replace with function body.
 	
-	
 
 

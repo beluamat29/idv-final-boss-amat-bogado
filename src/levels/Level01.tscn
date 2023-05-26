@@ -62,6 +62,7 @@ expand = true
 
 [node name="Floor2" type="StaticBody2D" parent="Environment"]
 position = Vector2( 510, 581 )
+input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Floor2"]
 shape = SubResource( 6 )
@@ -118,6 +119,7 @@ script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
 texture = ExtResource( 7 )
+
 
 [node name="ProgressBar" type="TextureProgress" parent="Environment/Entities/Furniture/Desk"]
 visible = false
@@ -202,6 +204,30 @@ texture_under = ExtResource( 16 )
 texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
+[node name="TaskList" type="Panel" parent="."]
+margin_left = 35.0
+margin_top = 52.0
+margin_right = 335.0
+margin_bottom = 352.0
+mouse_filter = 2
+script = ExtResource( 18 )
+
+[node name="ItemsList" type="VBoxContainer" parent="TaskList"]
+margin_right = 146.0
+margin_bottom = 210.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_Kitchen_input_event"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_Desk_input_event"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_Plant_input_event"]
+[connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
+[connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
+[connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
+[connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
+[connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
+
 [connection signal="body_entered" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_entered"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_input_event"]
@@ -212,3 +238,4 @@ nine_patch_stretch = true
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
+
