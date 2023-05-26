@@ -20,10 +20,10 @@ func objectWasPressed(objectId):
 #		objectWasPressed(2)
 
 
-#func _on_Desk_input_event(viewport, event, shape_idx):
-#	if (event is InputEventMouseButton && event.pressed):
-#   player.set_target()
-#		objectWasPressed(1)
+func _on_Desk_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		player.set_target()
+		#objectWasPressed(1)
 
 
 #func _on_Plant_input_event(viewport, event, shape_idx):

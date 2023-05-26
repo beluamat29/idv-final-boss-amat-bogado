@@ -1,7 +1,6 @@
 extends VBoxContainer
 
 const listItemScene = preload("ListItem.tscn")
-
 onready var tasksList:Dictionary = {}
 
 signal victory

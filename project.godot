@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Furniture",
 "language": "GDScript",
-"path": "res://src/levels/Furniture.gd"
+"path": "res://src/environment/Furniture.gd"
 } ]
 _global_script_class_icons={
 "Furniture": ""
