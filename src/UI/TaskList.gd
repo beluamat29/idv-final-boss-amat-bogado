@@ -5,8 +5,6 @@ onready var furniture = get_node("/root/LevelManager/CurrentLevelContainer/Level
 
 func _ready():
 	var tasks: Dictionary = furniture.get_tasks()
-	print('%%%%%%%%%%%')
-	print(tasks)
 	for taskID in tasks.keys():
 		addItems(tasks[taskID], taskID)
 	

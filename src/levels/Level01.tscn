@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -6,12 +6,12 @@
 [ext_resource path="res://src/environment/furniture/GenericFurniture.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/Time.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/environment/furniture/computer.png" type="Texture" id=7]
 [ext_resource path="res://assets/textures/environment/furniture/kitchen.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
 [ext_resource path="res://src/environment/Furniture.gd" type="Script" id=12]
-[ext_resource path="res://src/environment/Fridge.gd" type="Script" id=13]
 [ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/empty_bar.png" type="Texture" id=16]
@@ -19,25 +19,9 @@
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=18]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=19]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/environment/Kitchen.gd" type="Script" id=21]
-[ext_resource path="res://src/environment/Plant.gd" type="Script" id=22]
-[ext_resource path="res://src/environment/WashingMachine.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 168.994, 244.87 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 246.069, 119.626 )
-
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 145.629
-height = 173.93
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 181.527, 243.81 )
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Label
@@ -74,6 +58,11 @@ position = Vector2( 1024, 301 )
 
 [node name="Entities" type="Node2D" parent="Environment"]
 
+[node name="Fridge" type="Sprite" parent="Environment/Entities"]
+position = Vector2( 942, 467 )
+scale = Vector2( 0.314453, 0.353516 )
+texture = ExtResource( 6 )
+
 [node name="Couch" type="Sprite" parent="Environment/Entities"]
 position = Vector2( 399.5, 507.25 )
 scale = Vector2( 0.361328, 0.313477 )
@@ -83,56 +72,28 @@ texture = ExtResource( 11 )
 script = ExtResource( 12 )
 genericFurnitureScene = ExtResource( 4 )
 
-[node name="Fridge" type="Area2D" parent="Environment/Entities/Furniture"]
-position = Vector2( 923, 467 )
-scale = Vector2( 0.298828, 0.359375 )
-script = ExtResource( 13 )
-
-[node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Fridge"]
-position = Vector2( 4.18298, 5.56525 )
-scale = Vector2( 0.98366, 0.978261 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/Fridge"]
-position = Vector2( 8.36597, 0.00012207 )
-shape = SubResource( 1 )
-
-[node name="Kitchen" type="Area2D" parent="Environment/Entities/Furniture"]
-position = Vector2( 737, 463 )
-scale = Vector2( 0.453125, 0.417969 )
-script = ExtResource( 21 )
-
-[node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Kitchen"]
-texture = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/Kitchen"]
-position = Vector2( 4.41394, 90.9159 )
-shape = SubResource( 2 )
-
 [node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+texture = ExtResource( 7 )
+tasks = [ "Asistir a reunion laboral" ]
 
-[node name="Plant" type="Area2D" parent="Environment/Entities/Furniture"]
-position = Vector2( 269.25, 516.75 )
-scale = Vector2( 0.163086, 0.170899 )
-script = ExtResource( 22 )
+[node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+position = Vector2( 768, 469 )
+id = 2
+texture = ExtResource( 8 )
+tasks = [ "Preparar almuerzo" ]
 
-[node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Plant"]
+[node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+position = Vector2( 269, 510 )
+scale = Vector2( 0.2, 0.2 )
+id = 3
 texture = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/Plant"]
-shape = SubResource( 4 )
-
-[node name="WashingMachine" type="Area2D" parent="Environment/Entities/Furniture"]
-position = Vector2( 553, 503 )
-scale = Vector2( 0.214844, 0.205078 )
-script = ExtResource( 23 )
-
-[node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/WashingMachine"]
+[node name="WashingMachine" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+position = Vector2( 577, 495 )
+scale = Vector2( 0.25, 0.25 )
+id = 4
 texture = ExtResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/WashingMachine"]
-position = Vector2( 55.8545, -9.7522 )
-shape = SubResource( 5 )
+tasks = [ null ]
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
 z_index = 1
@@ -182,6 +143,14 @@ texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]

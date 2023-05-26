@@ -3,21 +3,21 @@ extends Node2D
 class_name Furniture
 export (PackedScene) var genericFurnitureScene: PackedScene
 
-
 func get_tasks():
 	var tasks: Dictionary = {}
 	var furnitures = get_children()
 	for furniture in furnitures:
 		tasks[furniture.id] = furniture.tasks
-	print('/////////')
-	print(tasks)
 	return tasks
 
 func _ready():
-	instanciate_furniture(1, ['Preparar almuerzo']);
-	instanciate_furniture(2, ['Lavar ropa sucia']);
-	instanciate_furniture(3, ['Regar la planta']);
-	instanciate_furniture(4, ['lkanflkanklanfkla']);
+	var tasksList = ['Asistir a reunion laboral', 'Preparar almuerzo', 'Regar planta', 'Lavar ropa sucia']
+	var furnitureInstances = get_children();
+	print(furnitureInstances)
+	for i in range(furnitureInstances.size()):
+		furnitureInstances[i].id = i
+		furnitureInstances[i].tasks = [tasksList[i]]
+		
 	
 func instanciate_furniture(id: int, tasks: Array):
 	var instancedFurniture = genericFurnitureScene.instance()
