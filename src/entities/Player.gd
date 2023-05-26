@@ -10,7 +10,7 @@ func _process(delta):
 	if position.distance_to(target) > 5:
 		velocity = move_and_slide(velocity)
 		
-		
+	
 #func _input(event):
 #	if event.is_action_pressed("click"):
 #		target = get_global_mouse_position()
