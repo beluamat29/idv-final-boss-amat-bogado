@@ -1,7 +1,7 @@
 extends Node
 
 onready var tasksList = $TaskList/ItemsList
-onready var player: KinematicBody2D = $Player
+onready var player: KinematicBody2D = $Environment/Entities/Player
 
 signal victory
 signal game_over
@@ -37,3 +37,4 @@ func _on_Time_game_over():
 
 func _on_StressBar_game_over():
 	emit_signal("game_over")
+
