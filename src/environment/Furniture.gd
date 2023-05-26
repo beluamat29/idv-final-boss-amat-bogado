@@ -1,12 +1,10 @@
 extends Node2D
 
-onready var mainScene = get_node("/root/Main")
+class_name Furniture
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func get_tasks():
+	var tasks: Dictionary = {}
+	var furtinures = get_children()
+	for furniture in furtinures:
+		tasks[furniture.id] = furniture.tasks
+	return tasks

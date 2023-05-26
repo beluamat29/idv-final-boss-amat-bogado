@@ -1,15 +1,13 @@
 extends Control
 
 onready var list = $ItemsList
-onready var level = get_node("/root/LevelManager/CurrentLevelContainer/Level01")
-
-var listIndex = 0
+onready var furniture = get_node("/root/LevelManager/CurrentLevelContainer/Level01/Environment/Entities/Furniture")
 
 func _ready():
-	var tasks = level.getTasksList()
-	for task in tasks:
-		addItem(task)
+	var tasks: Dictionary = furniture.get_tasks()
+	for taskID in tasks.keys():
+		addItems(tasks[taskID], taskID)
 	
-func addItem(task):
-	listIndex += 1
-	list.add_task(task[1], task[0])
+func addItems(tasks, taksID):
+	for task in tasks:
+		list.add_task(taksID, task)
