@@ -68,7 +68,7 @@ texture = ExtResource( 19 )
 [node name="LeftWall2" parent="Environment" instance=ExtResource( 20 )]
 
 [node name="RightWall2" parent="Environment" instance=ExtResource( 20 )]
-position = Vector2( 1016, 301 )
+position = Vector2( 1024, 301 )
 
 [node name="Entities" type="Node2D" parent="Environment"]
 
