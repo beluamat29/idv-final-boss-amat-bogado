@@ -1,12 +1,11 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/environment/Desk.gd" type="Script" id=4]
+[ext_resource path="res://src/environment/furniture/GenericFurniture.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/Time.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=6]
-[ext_resource path="res://assets/textures/environment/furniture/computer.png" type="Texture" id=7]
 [ext_resource path="res://assets/textures/environment/furniture/kitchen.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
@@ -32,9 +31,6 @@ extents = Vector2( 168.994, 244.87 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 246.069, 119.626 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 227.828, 197.019 )
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 145.629
@@ -85,6 +81,7 @@ texture = ExtResource( 11 )
 
 [node name="Furniture" type="Node2D" parent="Environment/Entities"]
 script = ExtResource( 12 )
+genericFurnitureScene = ExtResource( 4 )
 
 [node name="Fridge" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 923, 467 )
@@ -112,26 +109,7 @@ texture = ExtResource( 8 )
 position = Vector2( 4.41394, 90.9159 )
 shape = SubResource( 2 )
 
-[node name="Desk" type="Area2D" parent="Environment/Entities/Furniture"]
-position = Vector2( 128, 472 )
-scale = Vector2( 0.408203, 0.398438 )
-script = ExtResource( 4 )
-
-[node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
-texture = ExtResource( 7 )
-
-[node name="ProgressBar" type="TextureProgress" parent="Environment/Entities/Furniture/Desk"]
-visible = false
-margin_left = 142.086
-margin_top = -215.843
-margin_right = 242.086
-margin_bottom = -201.843
-texture_under = ExtResource( 16 )
-texture_progress = ExtResource( 14 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/Desk"]
-position = Vector2( -9.79907, 23.843 )
-shape = SubResource( 3 )
+[node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 
 [node name="Plant" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 269.25, 516.75 )
@@ -204,14 +182,8 @@ texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
-[connection signal="body_entered" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_entered"]
-[connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_exited"]
-[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_Desk_input_event"]
-[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_input_event"]
-[connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_Desk_task_finished"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
-[connection signal="timeout" from="Time/Countdown" to="Environment/Entities/Furniture/Desk" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
