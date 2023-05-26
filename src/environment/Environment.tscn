@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=1]
-[ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=2]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/environment/TaskList.gd" type="Script" id=4]
 [ext_resource path="res://src/environment/ItemList.gd" type="Script" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 511, 23.5 )
 
 [node name="Environment" type="Node"]
 
@@ -17,16 +13,6 @@ margin_bottom = 600.0
 mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
-
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2( 510, 581 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Floor"]
-scale = Vector2( 1.11694, 0.868421 )
-texture = ExtResource( 2 )
 
 [node name="LeftWall" parent="." instance=ExtResource( 3 )]
 
