@@ -19,10 +19,8 @@ func initialize(identifier: int, tareas: Array):
 	tasks = tareas
 
 func _on_GenericFurniture_body_entered(body):
-	print('antes del label')
 	if task_activated:
 		task_in_progress = true
-		print('mostrando label')
 		progress_bar.show()
 
 func _on_GenericFurniture_body_exited(body):

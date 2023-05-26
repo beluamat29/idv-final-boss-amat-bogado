@@ -16,10 +16,10 @@ script = ExtResource( 2 )
 
 [node name="ProgressBar" type="TextureProgress" parent="."]
 visible = false
-margin_left = 142.086
-margin_top = -215.843
-margin_right = 242.086
-margin_bottom = -201.843
+margin_left = 142.0
+margin_top = -216.0
+margin_right = 242.0
+margin_bottom = -202.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 1 )
 
