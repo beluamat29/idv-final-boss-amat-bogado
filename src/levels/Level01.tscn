@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/levels/Desk.gd" type="Script" id=4]
 [ext_resource path="res://src/UI/Time.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/environment/furniture/computer.png" type="Texture" id=7]
@@ -10,6 +11,7 @@
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
+[ext_resource path="res://src/levels/Furniture.gd" type="Script" id=12]
 [ext_resource path="res://src/environment/Fridge.gd" type="Script" id=13]
 [ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
@@ -18,6 +20,9 @@
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=18]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=19]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/levels/Kitchen.gd" type="Script" id=21]
+[ext_resource path="res://src/levels/Plant.gd" type="Script" id=22]
+[ext_resource path="res://src/levels/WashingMachine.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
@@ -72,7 +77,13 @@ position = Vector2( 1024, 301 )
 
 [node name="Entities" type="Node2D" parent="Environment"]
 
+[node name="Couch" type="Sprite" parent="Environment/Entities"]
+position = Vector2( 399.5, 507.25 )
+scale = Vector2( 0.361328, 0.313477 )
+texture = ExtResource( 11 )
+
 [node name="Furniture" type="Node2D" parent="Environment/Entities"]
+script = ExtResource( 12 )
 
 [node name="Fridge" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 923, 467 )
@@ -91,6 +102,7 @@ shape = SubResource( 1 )
 [node name="Kitchen" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 737, 463 )
 scale = Vector2( 0.453125, 0.417969 )
+script = ExtResource( 21 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Kitchen"]
 texture = ExtResource( 8 )
@@ -102,9 +114,19 @@ shape = SubResource( 2 )
 [node name="Desk" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 128, 472 )
 scale = Vector2( 0.408203, 0.398438 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
 texture = ExtResource( 7 )
+
+[node name="ProgressBar" type="TextureProgress" parent="Environment/Entities/Furniture/Desk"]
+visible = false
+margin_left = 142.086
+margin_top = -215.843
+margin_right = 242.086
+margin_bottom = -201.843
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Furniture/Desk"]
 position = Vector2( -9.79907, 23.843 )
@@ -113,6 +135,7 @@ shape = SubResource( 3 )
 [node name="Plant" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 269.25, 516.75 )
 scale = Vector2( 0.163086, 0.170899 )
+script = ExtResource( 22 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/Plant"]
 texture = ExtResource( 9 )
@@ -123,6 +146,7 @@ shape = SubResource( 4 )
 [node name="WashingMachine" type="Area2D" parent="Environment/Entities/Furniture"]
 position = Vector2( 553, 503 )
 scale = Vector2( 0.214844, 0.205078 )
+script = ExtResource( 23 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Entities/Furniture/WashingMachine"]
 texture = ExtResource( 10 )
@@ -131,13 +155,22 @@ texture = ExtResource( 10 )
 position = Vector2( 55.8545, -9.7522 )
 shape = SubResource( 5 )
 
-[node name="Couch" type="Sprite" parent="Environment/Entities/Furniture"]
-position = Vector2( 399.5, 507.25 )
-scale = Vector2( 0.361328, 0.313477 )
-texture = ExtResource( 11 )
-
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
 z_index = 1
+
+[node name="TaskList" type="Panel" parent="."]
+margin_left = 35.0
+margin_top = 52.0
+margin_right = 335.0
+margin_bottom = 352.0
+mouse_filter = 2
+script = ExtResource( 18 )
+
+[node name="ItemsList" type="VBoxContainer" parent="TaskList"]
+margin_right = 146.0
+margin_bottom = 210.0
+mouse_filter = 2
+script = ExtResource( 2 )
 
 [node name="Time" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -169,25 +202,13 @@ texture_under = ExtResource( 16 )
 texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
-[node name="TaskList" type="Panel" parent="."]
-margin_left = 35.0
-margin_top = 52.0
-margin_right = 335.0
-margin_bottom = 352.0
-mouse_filter = 2
-script = ExtResource( 18 )
-
-[node name="ItemsList" type="VBoxContainer" parent="TaskList"]
-margin_right = 146.0
-margin_bottom = 210.0
-mouse_filter = 2
-script = ExtResource( 2 )
-
-[connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_Kitchen_input_event"]
-[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_Desk_input_event"]
-[connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_Plant_input_event"]
+[connection signal="body_entered" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_entered"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_body_exited"]
+[connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Furniture/Desk" method="_on_Desk_input_event"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_Desk_task_finished"]
+[connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
+[connection signal="timeout" from="Time/Countdown" to="Environment/Entities/Furniture/Desk" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
-[connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]

@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 const listItemScene = preload("ListItem.tscn")
-onready var tasksList:Array = []
+onready var tasksList:Dictionary = {}
 
 signal victory
 
@@ -14,21 +14,21 @@ func add_task(taskId, taskName):
 	var item = listItemScene.instance()
 	item.addText(taskName)
 	item.setId(taskId)
-	tasksList.append([taskId, item, false])
+	tasksList[taskId] = ([item, false])
 	self.add_child(item)
 	
 func objectWasPressed(objectId):
 	var itemAtIndex = tasksList[objectId]
-	itemAtIndex[2] = true
-	itemAtIndex[1].markAsCompleted()
+	itemAtIndex[1] = true
+	itemAtIndex[0].markAsCompleted()
 	
 	checkIfWin()
 	
 func checkIfWin():
 	var win = true
 	
-	for task in tasksList:
-		win = win && task[2]
+	for task in tasksList.values():
+		win = win && task[1]
 	
 	if win:
 		emit_signal("victory")
