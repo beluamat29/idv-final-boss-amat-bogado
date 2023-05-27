@@ -155,4 +155,5 @@ nine_patch_stretch = true
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
+[connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]

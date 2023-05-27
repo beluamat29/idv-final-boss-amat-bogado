@@ -1,17 +1,90 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/player.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/entities/tiredEyes.png" type="Texture" id=3]
-
+[ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/entities/eyes2.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/entities/eyes3.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 56 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1.37499, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.764925, 0.738411 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "squash"
+length = 5.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, 0 ), Vector2( -0.500015, -3.78128 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.764925, 0.738411 ), Vector2( 0.880597, 0.80505 ), Vector2( 0.764925, 0.738411 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 510, 500 )
 collision_layer = 2
 script = ExtResource( 1 )
+eyes1 = ExtResource( 4 )
+eyes2 = ExtResource( 5 )
+eyes3 = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 0 )
@@ -23,6 +96,10 @@ scale = Vector2( 0.764925, 0.738411 )
 texture = ExtResource( 2 )
 
 [node name="Eyes" type="Sprite" parent="Sprite"]
-position = Vector2( -1.7312, -38.704 )
-scale = Vector2( 0.55043, 0.547399 )
-texture = ExtResource( 3 )
+position = Vector2( -0.243558, -57.2246 )
+scale = Vector2( 0.185195, 0.170963 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/squash = SubResource( 2 )
