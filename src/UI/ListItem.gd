@@ -6,7 +6,8 @@ func setId(itemId):
 	id = itemId
 	
 func addText(value):
-	get_node("CheckBox").text = value
+	var check_box = get_node("CheckBox")
+	check_box.text = value
 	rect_min_size = Vector2(150, 40)
 	
 func markAsCompleted():

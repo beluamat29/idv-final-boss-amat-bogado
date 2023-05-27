@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=10]
 [ext_resource path="res://assets/textures/environment/furniture/couch.png" type="Texture" id=11]
 [ext_resource path="res://src/environment/Furniture.gd" type="Script" id=12]
+[ext_resource path="res://assets/textures/environment/whiteboard.png" type="Texture" id=13]
 [ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/empty_bar.png" type="Texture" id=16]
@@ -98,17 +99,21 @@ tasks = [ null ]
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
 z_index = 1
 
-[node name="TaskList" type="Panel" parent="."]
-margin_left = 35.0
-margin_top = 52.0
-margin_right = 335.0
-margin_bottom = 352.0
+[node name="TaskList" type="TextureRect" parent="."]
+margin_left = 268.0
+margin_top = 170.0
+margin_right = 568.0
+margin_bottom = 470.0
 mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
 script = ExtResource( 18 )
 
 [node name="ItemsList" type="VBoxContainer" parent="TaskList"]
-margin_right = 146.0
-margin_bottom = 210.0
+margin_left = 31.0
+margin_top = 24.0
+margin_right = 276.0
+margin_bottom = 212.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
