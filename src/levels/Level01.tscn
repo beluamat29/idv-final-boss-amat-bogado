@@ -89,7 +89,7 @@ id = 3
 texture = ExtResource( 9 )
 
 [node name="WashingMachine" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
-position = Vector2( 577, 495 )
+position = Vector2( 591, 497 )
 scale = Vector2( 0.25, 0.25 )
 id = 4
 texture = ExtResource( 10 )
