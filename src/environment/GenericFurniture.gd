@@ -26,7 +26,6 @@ func _on_GenericFurniture_body_entered(body):
 		print(sprite_position)
 		
 		progress_bar.show()
-		#print(progress_bar.position)
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 
