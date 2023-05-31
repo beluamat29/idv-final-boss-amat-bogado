@@ -30,3 +30,9 @@ func _on_GenericFurniture_task_finished(id):
 
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
+
+func _on_Child_game_finished():
+	emit_signal("game_over")
+
+func _on_Child_set_player_target():
+	player.set_target()

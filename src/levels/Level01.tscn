@@ -91,11 +91,11 @@ id = 4
 texture = ExtResource( 10 )
 tasks = [ null ]
 
-[node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
-z_index = 1
-
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
 position = Vector2( 385, 497 )
+
+[node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
+z_index = 1
 
 [node name="TaskList" type="TextureRect" parent="."]
 margin_left = 71.0
@@ -154,6 +154,8 @@ nine_patch_stretch = true
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="game_finished" from="Environment/Entities/Child" to="." method="_on_Child_game_finished"]
+[connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
