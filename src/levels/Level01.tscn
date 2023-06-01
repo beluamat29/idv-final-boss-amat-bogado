@@ -155,6 +155,7 @@ nine_patch_stretch = true
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="game_finished" from="Environment/Entities/Child" to="." method="_on_Child_game_finished"]
+[connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
