@@ -40,10 +40,9 @@ func change_stress_signs(value: int):
 		eyes.texture = eyes2
 	if value >= 66 && stress_level != 3:
 		stress_level = 3
-		$AnimationPlayer.play("squash", 0, 1)
+		$AnimationPlayer.play("squash", 0, 4)
 		eyes.texture = eyes3
 
 
 func _on_Child_player_baby_toggle(value):
-	print('taking care')
 	with_baby = value

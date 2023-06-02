@@ -86,6 +86,7 @@ anims/RESET = SubResource( 3 )
 anims/swing = SubResource( 2 )
 
 [connection signal="body_entered" from="Stroller" to="." method="_on_Stroller_body_entered"]
+[connection signal="body_exited" from="Stroller" to="." method="_on_Stroller_body_exited"]
 [connection signal="input_event" from="Stroller" to="." method="_on_Stroller_input_event"]
 [connection signal="timeout" from="ChildRandomTimer" to="." method="_on_ChildTimer_timeout"]
 [connection signal="timeout" from="ChildCryingCountdown" to="." method="_on_ChildCryingCountdown_timeout"]
