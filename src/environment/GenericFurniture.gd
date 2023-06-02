@@ -10,7 +10,6 @@ export var tasks: Array = []
 signal task_finished(id)
 
 onready var progress_bar:TextureProgress = $ProgressBar 
-onready var player:KinematicBody2D = get_node("/root/LevelManager/CurrentLevelContainer/Level01/Environment/Entities/Player")
 
 func _ready():
 	sprite.texture = texture
@@ -23,10 +22,8 @@ func _on_GenericFurniture_body_entered(body):
 	if task_activated:
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
-		print(sprite_position)
-		
+
 		progress_bar.show()
-		#print(progress_bar.position)
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 

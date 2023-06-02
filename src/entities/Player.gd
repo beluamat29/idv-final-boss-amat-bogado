@@ -5,6 +5,7 @@ export (int) var speed = 200
 onready var target = position
 onready var sprite:Sprite = $Sprite
 onready var eyes: Sprite = $Sprite/Eyes
+onready var with_baby:bool = false
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
 export var eyes1: Texture
@@ -20,13 +21,9 @@ func _process(delta):
 		velocity = move_and_slide(velocity)
 		
 	
-#func _input(event):
-#	if event.is_action_pressed("click"):
-#		target = get_global_mouse_position()
 func set_target():
-	target = get_global_mouse_position()
-
-
+	if !with_baby:
+		target = get_global_mouse_position()
 
 func _on_Floor2_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
@@ -43,6 +40,10 @@ func change_stress_signs(value: int):
 		eyes.texture = eyes2
 	if value >= 66 && stress_level != 3:
 		stress_level = 3
-		$AnimationPlayer.play("squash", -1, 5)
+		$AnimationPlayer.play("squash", 0, 1)
 		eyes.texture = eyes3
-		
+
+
+func _on_Child_player_baby_toggle(value):
+	print('taking care')
+	with_baby = value
