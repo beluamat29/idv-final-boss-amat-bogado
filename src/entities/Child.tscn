@@ -76,9 +76,6 @@ wait_time = 4.141
 autostart = true
 script = ExtResource( 3 )
 
-[node name="ChildCryingCountdown" type="Timer" parent="."]
-wait_time = 7.0
-
 [node name="StrollerAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/swing = SubResource( 2 )
@@ -87,5 +84,4 @@ anims/swing = SubResource( 2 )
 [connection signal="body_exited" from="Stroller" to="." method="_on_Stroller_body_exited"]
 [connection signal="input_event" from="Stroller" to="." method="_on_Stroller_input_event"]
 [connection signal="timeout" from="ChildRandomTimer" to="." method="_on_ChildTimer_timeout"]
-[connection signal="timeout" from="ChildCryingCountdown" to="." method="_on_ChildCryingCountdown_timeout"]
 [connection signal="animation_finished" from="StrollerAnimation" to="." method="_on_StrollerAnimation_animation_finished"]
