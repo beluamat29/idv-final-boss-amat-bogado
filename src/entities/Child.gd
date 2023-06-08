@@ -11,6 +11,7 @@ var body_entered: bool = false
 signal game_finished()
 signal set_player_target()
 signal player_baby_toggle(value)
+signal crying()
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
 	if task_activated && body_entered && crying:
@@ -25,7 +26,8 @@ func _physics_process(delta):
 func _on_ChildTimer_timeout():
 	attention.visible = true
 	crying = true
-	cryingTimer.start()
+	emit_signal("crying")
+	# cryingTimer.start()
 
 func _on_ChildCryingCountdown_timeout():
 	emit_signal("game_finished")

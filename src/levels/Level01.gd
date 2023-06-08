@@ -36,3 +36,11 @@ func _on_Child_game_finished():
 
 func _on_Child_set_player_target():
 	player.set_target()
+	
+func _on_Child_crying():
+	stress_bar.increased_stress = 4
+	
+func _on_Child_player_baby_toggle(value):
+	stress_bar.increased_stress = 1
+	
+

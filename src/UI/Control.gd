@@ -1,6 +1,7 @@
 extends Control
 
 export var stress_bar_path: NodePath
+var increased_stress = 1
 
 signal game_over
 signal change_stress_signs(value)
@@ -15,4 +16,4 @@ func _change_stress_bar(value) -> void:
 
 
 func _on_Countdown_timeout():
-	_change_stress_bar(2)
+	_change_stress_bar(increased_stress)
