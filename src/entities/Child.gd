@@ -6,6 +6,7 @@ onready var randomTimer = $ChildRandomTimer
 
 var task_activated: bool = false
 var body_entered: bool = false
+var crying_probability: int = 0
 
 signal set_player_target()
 signal player_baby_toggle(value)
@@ -21,9 +22,12 @@ func _physics_process(delta):
 		$StrollerAnimation.play("swing", -1, 1)
 	
 func _on_ChildTimer_timeout():
-	attention.visible = true
-	crying = true
-	emit_signal("crying")
+	var randomNumberGenerator = RandomNumberGenerator.new()
+	randomNumberGenerator.randomize()
+	if randomNumberGenerator.randf_range(1, 100) <= crying_probability:
+		attention.visible = true
+		crying = true
+		emit_signal("crying")
 
 func _on_Stroller_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed) && crying:
@@ -40,3 +44,9 @@ func _on_StrollerAnimation_animation_finished(anim_name):
 	emit_signal("player_baby_toggle", false)
 	randomTimer.reset()
 	
+func _on_task_in_progress(probability):
+	crying_probability = probability
+
+
+func _on_task_finished(id):
+	crying_probability = 0

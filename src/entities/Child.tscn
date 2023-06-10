@@ -72,7 +72,6 @@ color = Color( 1, 0.560784, 0, 1 )
 polygon = PoolVector2Array( 43, -126, 56, -120, 36, -91 )
 
 [node name="ChildRandomTimer" type="Timer" parent="."]
-wait_time = 4.141
 autostart = true
 script = ExtResource( 3 )
 

@@ -6,8 +6,10 @@ export var texture: Texture
 var task_activated: bool = false
 var task_in_progress: bool = false
 export var tasks: Array = []
+export var probability: int = 10
 
 signal task_finished(id)
+signal task_in_progress(probability)
 
 onready var progress_bar:TextureProgress = $ProgressBar 
 
@@ -20,6 +22,7 @@ func initialize(identifier: int, tareas: Array):
 
 func _on_GenericFurniture_body_entered(body):
 	if task_activated:
+		emit_signal("task_in_progress", probability)
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
 
