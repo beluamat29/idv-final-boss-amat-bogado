@@ -69,12 +69,13 @@ script = ExtResource( 12 )
 genericFurnitureScene = ExtResource( 4 )
 
 [node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+position = Vector2( 128, 471 )
 texture = ExtResource( 7 )
 tasks = [ "Asistir a reunion laboral" ]
 probability = 30
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
-position = Vector2( 768, 469 )
+position = Vector2( 768, 467 )
 id = 2
 texture = ExtResource( 8 )
 tasks = [ "Preparar almuerzo" ]

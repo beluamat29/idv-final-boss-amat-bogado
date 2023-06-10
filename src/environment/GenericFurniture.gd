@@ -5,6 +5,7 @@ onready var sprite: Sprite = $Sprite
 export var texture: Texture
 var task_activated: bool = false
 var task_in_progress: bool = false
+var body_entered: bool = false
 export var tasks: Array = []
 export var probability: int = 10
 
@@ -19,9 +20,9 @@ func _ready():
 func initialize(identifier: int, tareas: Array):
 	id = identifier
 	tasks = tareas
-
-func _on_GenericFurniture_body_entered(body):
-	if task_activated:
+	
+func _physics_process(delta):
+	if task_activated && body_entered && !task_in_progress:
 		emit_signal("task_in_progress", probability)
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
@@ -30,9 +31,14 @@ func _on_GenericFurniture_body_entered(body):
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 
+func _on_GenericFurniture_body_entered(body):
+	body_entered = true
+	print(body_entered)
+
 func _on_GenericFurniture_body_exited(body):
 	task_activated = false
 	task_in_progress = false
+	body_entered = false
 	progress_bar.hide()
 
 func _on_GenericFurniture_input_event(viewport, event, shape_idx):
@@ -45,6 +51,7 @@ func _on_FurnitureTimer_timeout():
 	elif progress_bar.value == 100:
 		task_activated = false
 		task_in_progress = false
+		body_entered = false
 		progress_bar.value = 0
 		progress_bar.hide()
 		emit_signal("task_finished", id)
