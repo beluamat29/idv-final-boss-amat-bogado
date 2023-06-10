@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -16,10 +16,12 @@
 [ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/empty_bar.png" type="Texture" id=16]
-[ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/environment/kitchenwall.png" type="Texture" id=17]
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=18]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=19]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/textures/environment/plants.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/environment/picture.png" type="Texture" id=22]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
@@ -32,9 +34,11 @@ script/source = "extends Label
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
 
-[node name="Background2" type="TextureRect" parent="."]
+[node name="LevelBackground" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
 mouse_filter = 2
 texture = ExtResource( 17 )
 expand = true
@@ -96,6 +100,16 @@ position = Vector2( 385, 497 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
 z_index = 1
+
+[node name="Picture" type="Sprite" parent="Environment"]
+position = Vector2( 462, 230 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 22 )
+
+[node name="Plants" type="Sprite" parent="Environment"]
+position = Vector2( 836, 236 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 21 )
 
 [node name="TaskList" type="TextureRect" parent="."]
 margin_left = 71.0
