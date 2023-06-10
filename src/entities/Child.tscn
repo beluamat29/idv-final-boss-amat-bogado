@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/entities/image.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/Child.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/ChildTimer.gd" type="Script" id=3]
-[ext_resource path="res://src/entities/ChildCryingCountdown.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37.5, 51.5 )
@@ -73,13 +72,8 @@ color = Color( 1, 0.560784, 0, 1 )
 polygon = PoolVector2Array( 43, -126, 56, -120, 36, -91 )
 
 [node name="ChildRandomTimer" type="Timer" parent="."]
-wait_time = 4.141
 autostart = true
 script = ExtResource( 3 )
-
-[node name="ChildCryingCountdown" type="Timer" parent="."]
-wait_time = 7.0
-script = ExtResource( 4 )
 
 [node name="StrollerAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
@@ -89,5 +83,4 @@ anims/swing = SubResource( 2 )
 [connection signal="body_exited" from="Stroller" to="." method="_on_Stroller_body_exited"]
 [connection signal="input_event" from="Stroller" to="." method="_on_Stroller_input_event"]
 [connection signal="timeout" from="ChildRandomTimer" to="." method="_on_ChildTimer_timeout"]
-[connection signal="timeout" from="ChildCryingCountdown" to="." method="_on_ChildCryingCountdown_timeout"]
 [connection signal="animation_finished" from="StrollerAnimation" to="." method="_on_StrollerAnimation_animation_finished"]

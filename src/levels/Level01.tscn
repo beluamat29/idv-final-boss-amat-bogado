@@ -69,14 +69,17 @@ script = ExtResource( 12 )
 genericFurnitureScene = ExtResource( 4 )
 
 [node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+position = Vector2( 128, 471 )
 texture = ExtResource( 7 )
 tasks = [ "Asistir a reunion laboral" ]
+probability = 30
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
-position = Vector2( 768, 469 )
+position = Vector2( 768, 467 )
 id = 2
 texture = ExtResource( 8 )
 tasks = [ "Preparar almuerzo" ]
+probability = 40
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 269, 510 )
@@ -90,6 +93,7 @@ scale = Vector2( 0.25, 0.25 )
 id = 4
 texture = ExtResource( 10 )
 tasks = [ null ]
+probability = 60
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
 position = Vector2( 385, 497 )
@@ -148,13 +152,22 @@ nine_patch_stretch = true
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
-[connection signal="game_finished" from="Environment/Entities/Child" to="." method="_on_Child_game_finished"]
+[connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="crying" from="Environment/Entities/Child" to="." method="_on_Child_crying"]
+[connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
