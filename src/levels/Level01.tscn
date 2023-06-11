@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -20,9 +20,20 @@
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=18]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=19]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/sounds/typing.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/washing-machine.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/rain-06.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/fonts/DS-DIGII.TTF" type="DynamicFontData" id=25]
+[ext_resource path="res://assets/textures/clock.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 22
+outline_size = 1
+font_data = ExtResource( 25 )
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Label
@@ -73,6 +84,7 @@ position = Vector2( 128, 471 )
 texture = ExtResource( 7 )
 tasks = [ "Asistir a reunion laboral" ]
 probability = 30
+sound = ExtResource( 21 )
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 768, 467 )
@@ -80,12 +92,14 @@ id = 2
 texture = ExtResource( 8 )
 tasks = [ "Preparar almuerzo" ]
 probability = 40
+sound = ExtResource( 23 )
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 269, 510 )
 scale = Vector2( 0.2, 0.2 )
 id = 3
 texture = ExtResource( 9 )
+sound = ExtResource( 24 )
 
 [node name="WashingMachine" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 591, 497 )
@@ -94,11 +108,13 @@ id = 4
 texture = ExtResource( 10 )
 tasks = [ null ]
 probability = 60
+sound = ExtResource( 22 )
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
 position = Vector2( 385, 497 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
+position = Vector2( 488, 455 )
 z_index = 1
 
 [node name="TaskList" type="TextureRect" parent="."]
@@ -122,16 +138,25 @@ script = ExtResource( 2 )
 [node name="Time" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[node name="Sprite" type="Sprite" parent="Time"]
+position = Vector2( 790, 234 )
+scale = Vector2( 0.24, 0.234 )
+texture = ExtResource( 26 )
+
 [node name="Countdown" type="Timer" parent="Time"]
 autostart = true
 
 [node name="TimeLeft" type="Label" parent="Time"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 13.0
-margin_top = 2.0
-margin_right = 122.0
-margin_bottom = 59.0
+margin_left = 750.0
+margin_top = 199.0
+margin_right = 831.0
+margin_bottom = 267.0
+custom_colors/font_color = Color( 0.658824, 0.113725, 0.113725, 1 )
+custom_fonts/font = SubResource( 8 )
 text = "tiempo"
+align = 1
+valign = 1
 script = SubResource( 7 )
 
 [node name="StressBar" type="Control" parent="."]
@@ -150,18 +175,22 @@ texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_finished"]

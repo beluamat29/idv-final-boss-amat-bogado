@@ -1,13 +1,41 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/textures/entities/player.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/entities/women_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/entities/walk_right_2.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/entities/eyes2.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/entities/eyes3.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/entities/women_back.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/entities/walk_left_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/entities/walk_right_1.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/entities/walk_left_2.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 26, 56 )
+extents = Vector2( 37, 108.5 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "busy",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -63,7 +91,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ), Vector2( -0.500015, -3.78128 ) ]
+"values": [ Vector2( -1.99999, -0.215632 ), Vector2( -2, -5.216 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:scale")
@@ -72,10 +100,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2, 5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.764925, 0.738411 ), Vector2( 0.880597, 0.80505 ), Vector2( 0.764925, 0.738411 ) ]
+"values": [ Vector2( 0.644928, 0.743671 ), Vector2( 0.78, 0.77 ) ]
 }
 
 [node name="Player" type="KinematicBody2D"]
@@ -87,17 +115,17 @@ eyes2 = ExtResource( 5 )
 eyes3 = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2, 0 )
+position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( -1.37499, 0 )
 scale = Vector2( 0.764925, 0.738411 )
-texture = ExtResource( 2 )
+frames = SubResource( 4 )
 
 [node name="Eyes" type="Sprite" parent="Sprite"]
-position = Vector2( -0.243558, -57.2246 )
-scale = Vector2( 0.185195, 0.170963 )
+position = Vector2( 3.89625, -80.2715 )
+scale = Vector2( 0.176947, 0.151247 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -3,6 +3,7 @@ extends Node2D
 onready var crying = false
 onready var attention = $Attention
 onready var randomTimer = $ChildRandomTimer
+onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var task_activated: bool = false
 var body_entered: bool = false
@@ -18,6 +19,7 @@ func _physics_process(delta):
 		attention.visible = false
 		task_activated = false
 		randomTimer.stop()
+		audio.stop()
 		emit_signal("player_baby_toggle", true)
 		$StrollerAnimation.play("swing", -1, 1)
 	
@@ -25,9 +27,11 @@ func _on_ChildTimer_timeout():
 	var randomNumberGenerator = RandomNumberGenerator.new()
 	randomNumberGenerator.randomize()
 	if randomNumberGenerator.randf_range(1, 100) <= crying_probability:
+		audio.play()
 		attention.visible = true
 		crying = true
 		emit_signal("crying")
+		
 
 func _on_Stroller_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed) && crying:
@@ -49,4 +53,8 @@ func _on_task_in_progress(probability):
 
 
 func _on_task_finished(id):
+	crying_probability = 0
+
+
+func _on_furniture_body_exited(body):
 	crying_probability = 0
