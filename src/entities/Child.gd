@@ -54,3 +54,7 @@ func _on_task_in_progress(probability):
 
 func _on_task_finished(id):
 	crying_probability = 0
+
+
+func _on_furniture_body_exited(body):
+	crying_probability = 0
