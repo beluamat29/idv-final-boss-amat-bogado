@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -26,6 +26,10 @@
 [ext_resource path="res://assets/sounds/rain-06.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/fonts/DS-DIGII.TTF" type="DynamicFontData" id=25]
 [ext_resource path="res://assets/textures/clock.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/environment/furniture/food.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/environment/furniture/clothesBasket.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/environment/furniture/flower.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/environment/furniture/postits.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
@@ -86,6 +90,12 @@ tasks = [ "Asistir a reunion laboral" ]
 probability = 30
 sound = ExtResource( 21 )
 
+[node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
+visible = false
+position = Vector2( 85.7417, -160.627 )
+scale = Vector2( 0.169856, 0.171569 )
+texture = ExtResource( 30 )
+
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 768, 467 )
 id = 2
@@ -94,12 +104,24 @@ tasks = [ "Preparar almuerzo" ]
 probability = 40
 sound = ExtResource( 23 )
 
+[node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Kitchen"]
+visible = false
+position = Vector2( 183.733, -42.667 )
+scale = Vector2( 0.212919, 0.205883 )
+texture = ExtResource( 27 )
+
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 269, 510 )
 scale = Vector2( 0.2, 0.2 )
 id = 3
 texture = ExtResource( 9 )
 sound = ExtResource( 24 )
+
+[node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Plant"]
+visible = false
+position = Vector2( -95, -135 )
+scale = Vector2( 0.304688, 0.265625 )
+texture = ExtResource( 29 )
 
 [node name="WashingMachine" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 591, 497 )
@@ -109,6 +131,12 @@ texture = ExtResource( 10 )
 tasks = [ null ]
 probability = 60
 sound = ExtResource( 22 )
+
+[node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/WashingMachine"]
+visible = false
+position = Vector2( 52, -336 )
+scale = Vector2( 0.382812, 0.421875 )
+texture = ExtResource( 28 )
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
 position = Vector2( 385, 497 )

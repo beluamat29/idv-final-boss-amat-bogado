@@ -2,6 +2,7 @@ extends Area2D
 
 export var id: int = 1
 onready var sprite: Sprite = $Sprite
+onready var taskFinishedSprite = $TaskFinishedSprite
 onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 export var texture: Texture
 var task_activated: bool = false
@@ -31,7 +32,7 @@ func _physics_process(delta):
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
 
-		progress_bar.show()
+		# progress_bar.show()
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 
@@ -60,5 +61,7 @@ func _on_FurnitureTimer_timeout():
 		progress_bar.value = 0
 		progress_bar.hide()
 		emit_signal("task_finished", id)
+		if(taskFinishedSprite != null):
+			taskFinishedSprite.visible = true
 		tasks.remove(tasks.size() - 1)
 	
