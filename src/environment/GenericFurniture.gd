@@ -3,6 +3,7 @@ extends Area2D
 export var id: int = 1
 onready var sprite: Sprite = $Sprite
 onready var taskFinishedSprite = $TaskFinishedSprite
+onready var animation = $Animation
 onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 export var texture: Texture
 var task_activated: bool = false
@@ -28,11 +29,12 @@ func initialize(identifier: int, tareas: Array):
 func _physics_process(delta):
 	if task_activated && body_entered && !task_in_progress:
 		audio.play()
+		toggleAnimation(true)
 		emit_signal("task_in_progress", probability)
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
 
-		progress_bar.show()
+		#progress_bar.show()
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 
@@ -41,6 +43,7 @@ func _on_GenericFurniture_body_entered(body):
 
 func _on_GenericFurniture_body_exited(body):
 	audio.stop()
+	toggleAnimation(false)
 	task_activated = false
 	task_in_progress = false
 	body_entered = false
@@ -63,5 +66,9 @@ func _on_FurnitureTimer_timeout():
 		emit_signal("task_finished", id)
 		if(taskFinishedSprite != null):
 			taskFinishedSprite.visible = true
+		toggleAnimation(false)
 		tasks.remove(tasks.size() - 1)
 	
+func toggleAnimation(value: bool):
+	if(animation != null):
+		animation.visible = value

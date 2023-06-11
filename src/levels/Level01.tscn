@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -30,9 +30,21 @@
 [ext_resource path="res://assets/textures/environment/furniture/clothesBasket.png" type="Texture" id=28]
 [ext_resource path="res://assets/textures/environment/furniture/flower.png" type="Texture" id=29]
 [ext_resource path="res://assets/textures/environment/furniture/postits.png" type="Texture" id=30]
+[ext_resource path="res://assets/textures/animations/smoke1.png" type="Texture" id=31]
+[ext_resource path="res://assets/textures/animations/smoke2.png" type="Texture" id=32]
+[ext_resource path="res://assets/textures/animations/smoke4.png" type="Texture" id=33]
+[ext_resource path="res://assets/textures/animations/smoke3.png" type="Texture" id=34]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 31 ), ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "smoke",
+"speed": 5.0
+} ]
 
 [sub_resource type="DynamicFont" id=8]
 size = 22
@@ -109,6 +121,15 @@ visible = false
 position = Vector2( 183.733, -42.667 )
 scale = Vector2( 0.212919, 0.205883 )
 texture = ExtResource( 27 )
+
+[node name="Animation" type="AnimatedSprite" parent="Environment/Entities/Furniture/Kitchen"]
+visible = false
+position = Vector2( -120.039, -326.273 )
+scale = Vector2( 0.469121, 0.40529 )
+frames = SubResource( 9 )
+animation = "smoke"
+frame = 1
+playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
 position = Vector2( 269, 510 )
