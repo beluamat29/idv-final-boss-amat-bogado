@@ -32,7 +32,7 @@ func _physics_process(delta):
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
 
-		# progress_bar.show()
+		progress_bar.show()
 		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
 		progress_bar.set_position(progress_bar_position)
 
