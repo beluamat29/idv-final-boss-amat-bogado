@@ -10,11 +10,27 @@ func _ready():
 	update_label(tiempoTotal)
 
 func update_label(tiempo):
-	label.text = String(tiempo/60) + ":" + String(tiempo%60)
+	var hours = tiempo/60 * 2
+	var minutes = tiempo%60
+	label.text = _hours(hours) + ":" + _minutes(minutes)
+	
+func _minutes(minutes):
+	if minutes == 0:
+		return '00'
+	if minutes <= 9:
+		return '0' + String(minutes)
+	return String(minutes)
+	
+func _hours(hours):
+	if hours == 0:
+		return '00'
+	if hours <= 9:
+		return '0' + String(hours)
+	return String(hours)
 	
 func _on_Countdown_timeout():
-	if(tiempoTotal > 0):
-		tiempoTotal -= 1
+	if(tiempoTotal < 660):
+		tiempoTotal += 5
 		update_label(tiempoTotal)
 	else:
 		get_tree().paused = true

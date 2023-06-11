@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/washing-machine.wav-a3ea160c18f2d48008d9e26d2cd91809.sample"
+
+[deps]
+
+source_file="res://assets/sounds/washing-machine.wav"
+dest_files=[ "res://.import/washing-machine.wav-a3ea160c18f2d48008d9e26d2cd91809.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
