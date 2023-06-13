@@ -225,7 +225,7 @@ playing = true
 position = Vector2( 385, 497 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 3 )]
-position = Vector2( 488, 455 )
+position = Vector2( 489, 447 )
 z_index = 1
 
 [node name="TaskList" type="TextureRect" parent="."]
@@ -286,25 +286,33 @@ texture_progress = ExtResource( 14 )
 nine_patch_stretch = true
 
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="." method="_on_furniture_body_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Desk" to="." method="_on_task_in_progress"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_furniture_body_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_task_in_progress"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/Plant" to="." method="_on_furniture_body_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/Plant" to="." method="_on_task_in_progress"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_in_progress"]
+[connection signal="body_exited" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_furniture_body_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_finished"]
+[connection signal="task_in_progress" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_task_in_progress"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="crying" from="Environment/Entities/Child" to="." method="_on_Child_crying"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]

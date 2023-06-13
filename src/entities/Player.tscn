@@ -91,7 +91,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1.99999, -0.215632 ), Vector2( -2, -5.216 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -2, -5.216 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:scale")

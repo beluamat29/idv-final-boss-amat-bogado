@@ -62,3 +62,7 @@ func change_stress_signs(value: int):
 func _on_Child_player_baby_toggle(value):
 	with_baby = value
 	busy = value
+
+
+func _on_task_in_progress(probability):
+	busy = true
