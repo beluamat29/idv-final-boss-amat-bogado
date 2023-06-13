@@ -89,7 +89,7 @@ animations = [ {
 "frames": [ ExtResource( 40 ), ExtResource( 41 ), ExtResource( 39 ), ExtResource( 39 ), ExtResource( 45 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 51 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 42 ), ExtResource( 62 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 56 ), ExtResource( 64 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 61 ), ExtResource( 60 ), ExtResource( 52 ), ExtResource( 63 ) ],
 "loop": true,
 "name": "washing",
-"speed": 50.0
+"speed": 100.0
 } ]
 
 [sub_resource type="DynamicFont" id=8]
@@ -159,7 +159,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
@@ -182,7 +181,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
@@ -214,11 +213,12 @@ scale = Vector2( 0.382812, 0.421875 )
 texture = ExtResource( 28 )
 
 [node name="Animation" type="AnimatedSprite" parent="Environment/Entities/Furniture/WashingMachine"]
+visible = false
 position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 22
+frame = 23
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
