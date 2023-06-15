@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -38,6 +38,32 @@
 [ext_resource path="res://assets/textures/animations/desk2.png" type="Texture" id=36]
 [ext_resource path="res://assets/textures/animations/desk4.png" type="Texture" id=37]
 [ext_resource path="res://assets/textures/animations/desk3.png" type="Texture" id=38]
+[ext_resource path="res://assets/textures/animations/washing3.png" type="Texture" id=39]
+[ext_resource path="res://assets/textures/animations/washing1.png" type="Texture" id=40]
+[ext_resource path="res://assets/textures/animations/washing2.png" type="Texture" id=41]
+[ext_resource path="res://assets/textures/animations/washing13.png" type="Texture" id=42]
+[ext_resource path="res://assets/textures/animations/washing5.png" type="Texture" id=43]
+[ext_resource path="res://assets/textures/animations/washing6.png" type="Texture" id=44]
+[ext_resource path="res://assets/textures/animations/washing4.png" type="Texture" id=45]
+[ext_resource path="res://assets/textures/animations/washing11.png" type="Texture" id=46]
+[ext_resource path="res://assets/textures/animations/washing8.png" type="Texture" id=47]
+[ext_resource path="res://assets/textures/animations/washing12.png" type="Texture" id=48]
+[ext_resource path="res://assets/textures/animations/washing10.png" type="Texture" id=49]
+[ext_resource path="res://assets/textures/animations/washing9.png" type="Texture" id=50]
+[ext_resource path="res://assets/textures/animations/washing7.png" type="Texture" id=51]
+[ext_resource path="res://assets/textures/animations/washing26.png" type="Texture" id=52]
+[ext_resource path="res://assets/textures/animations/washing23.png" type="Texture" id=53]
+[ext_resource path="res://assets/textures/animations/washing16.png" type="Texture" id=54]
+[ext_resource path="res://assets/textures/animations/washing19.png" type="Texture" id=55]
+[ext_resource path="res://assets/textures/animations/washing17.png" type="Texture" id=56]
+[ext_resource path="res://assets/textures/animations/washing22.png" type="Texture" id=57]
+[ext_resource path="res://assets/textures/animations/washing15.png" type="Texture" id=58]
+[ext_resource path="res://assets/textures/animations/washing21.png" type="Texture" id=59]
+[ext_resource path="res://assets/textures/animations/washing25.png" type="Texture" id=60]
+[ext_resource path="res://assets/textures/animations/washing24.png" type="Texture" id=61]
+[ext_resource path="res://assets/textures/animations/washing14.png" type="Texture" id=62]
+[ext_resource path="res://assets/textures/animations/washing27.png" type="Texture" id=63]
+[ext_resource path="res://assets/textures/animations/washing18.png" type="Texture" id=64]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
@@ -56,6 +82,14 @@ animations = [ {
 "loop": true,
 "name": "smoke",
 "speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 40 ), ExtResource( 41 ), ExtResource( 39 ), ExtResource( 39 ), ExtResource( 45 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 51 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 42 ), ExtResource( 62 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 56 ), ExtResource( 64 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 61 ), ExtResource( 60 ), ExtResource( 52 ), ExtResource( 63 ) ],
+"loop": true,
+"name": "washing",
+"speed": 100.0
 } ]
 
 [sub_resource type="DynamicFont" id=8]
@@ -125,7 +159,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
@@ -148,7 +181,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
@@ -178,6 +211,15 @@ visible = false
 position = Vector2( 52, -336 )
 scale = Vector2( 0.382812, 0.421875 )
 texture = ExtResource( 28 )
+
+[node name="Animation" type="AnimatedSprite" parent="Environment/Entities/Furniture/WashingMachine"]
+visible = false
+position = Vector2( 59.4305, 58 )
+scale = Vector2( 2.35573, 2.32653 )
+frames = SubResource( 11 )
+animation = "washing"
+frame = 23
+playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 11 )]
 position = Vector2( 385, 497 )
