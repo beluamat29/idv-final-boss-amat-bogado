@@ -162,6 +162,7 @@ animation = "computer"
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 position = Vector2( 768, 467 )
 id = 2
 texture = ExtResource( 8 )

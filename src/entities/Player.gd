@@ -8,10 +8,13 @@ onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
-var busy = false
+var busy: bool = false
+var walk: bool = false
 export var eyes1: Texture
 export var eyes2: Texture
 export var eyes3: Texture 
+
+signal busy()
 
 func _ready():
 	$AnimationPlayer.play("squash")
@@ -19,6 +22,7 @@ func _ready():
 func _physics_process(delta):
 	velocity.x = position.direction_to(target).x * speed
 	if abs(position.x - target.x) > 5:
+		walk = true
 		velocity = move_and_slide(velocity)
 		if target.x - position.x < 0:
 			sprite.play("walk_left")
@@ -27,14 +31,13 @@ func _physics_process(delta):
 			sprite.play("walk_right")
 			eyes.hide()
 	elif busy:
+		walk = false
 		sprite.play("busy")
 		eyes.hide()
 	else:
+		walk = false
 		sprite.play("default")
 		eyes.show()
-	
-	
-		
 	
 func set_target():
 	if !with_baby:

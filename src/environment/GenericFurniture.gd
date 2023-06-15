@@ -9,6 +9,7 @@ export var texture: Texture
 var task_activated: bool = false
 var task_in_progress: bool = false
 var body_entered: bool = false
+var player: KinematicBody2D
 export var tasks: Array = []
 export var probability: int = 10
 export var sound: AudioStream
@@ -28,18 +29,21 @@ func initialize(identifier: int, tareas: Array):
 	
 func _physics_process(delta):
 	if task_activated && body_entered && !task_in_progress:
-		audio.play()
-		toggleAnimation(true)
-		emit_signal("task_in_progress", probability)
-		task_in_progress = true
-		var sprite_position: Vector2 = sprite.position
+		if !player.busy:
+			player.busy = true
+			audio.play()
+			toggleAnimation(true)
+			emit_signal("task_in_progress", probability)
+			task_in_progress = true
+			var sprite_position: Vector2 = sprite.position
 
-		#progress_bar.show()
-		var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
-		progress_bar.set_position(progress_bar_position)
-
+			#progress_bar.show()
+			var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
+			progress_bar.set_position(progress_bar_position)
+			
 func _on_GenericFurniture_body_entered(body):
 	body_entered = true
+	player = body
 
 func _on_GenericFurniture_body_exited(body):
 	audio.stop()
@@ -47,6 +51,7 @@ func _on_GenericFurniture_body_exited(body):
 	task_activated = false
 	task_in_progress = false
 	body_entered = false
+	player.busy = false
 	progress_bar.hide()
 
 func _on_GenericFurniture_input_event(viewport, event, shape_idx):
