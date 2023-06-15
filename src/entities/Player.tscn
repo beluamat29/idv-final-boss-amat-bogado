@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/women_idle.png" type="Texture" id=2]
@@ -10,6 +10,12 @@
 [ext_resource path="res://assets/textures/entities/walk_left_1.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/entities/walk_right_1.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/entities/walk_left_2.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/entities/eyes1_left.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/entities/eyes3_left.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/entities/eyes3_right.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/entities/eyes2_right.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/entities/eyes2_left.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/entities/eyes1_right.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37, 108.5 )
@@ -113,6 +119,12 @@ script = ExtResource( 1 )
 eyes1 = ExtResource( 4 )
 eyes2 = ExtResource( 5 )
 eyes3 = ExtResource( 6 )
+eyes1_left = ExtResource( 11 )
+eyes1_right = ExtResource( 16 )
+eyes2_left = ExtResource( 15 )
+eyes2_right = ExtResource( 14 )
+eyes3_left = ExtResource( 12 )
+eyes3_right = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )

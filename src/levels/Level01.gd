@@ -41,5 +41,3 @@ func _on_Child_crying():
 func _on_Child_player_baby_toggle(value):
 	stress_bar.increased_stress = 1
 
-func _on_task_in_progress(probability):
-	pass
