@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/women_idle.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/textures/entities/eyes2_right.png" type="Texture" id=14]
 [ext_resource path="res://assets/textures/entities/eyes2_left.png" type="Texture" id=15]
 [ext_resource path="res://assets/textures/entities/eyes1_right.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/entities/walk_right3.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/entities/walk_left3.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37, 108.5 )
@@ -32,12 +34,12 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 18 ), ExtResource( 10 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "walk_left",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 17 ), ExtResource( 3 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "walk_right",
 "speed": 5.0
