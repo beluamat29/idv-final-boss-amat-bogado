@@ -22,22 +22,22 @@
 [ext_resource path="res://assets/sounds/typing.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/fonts/DS-DIGII.TTF" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/sounds/washing-machine.wav" type="AudioStream" id=22]
-[ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=23]
-[ext_resource path="res://assets/sounds/rain-06.wav" type="AudioStream" id=24]
-[ext_resource path="res://assets/fonts/DS-DIGII.TTF" type="DynamicFontData" id=25]
-[ext_resource path="res://assets/textures/clock.png" type="Texture" id=26]
-[ext_resource path="res://assets/textures/environment/furniture/food.png" type="Texture" id=27]
-[ext_resource path="res://assets/textures/environment/furniture/clothesBasket.png" type="Texture" id=28]
-[ext_resource path="res://assets/textures/environment/furniture/flower.png" type="Texture" id=29]
-[ext_resource path="res://assets/textures/environment/furniture/postits.png" type="Texture" id=30]
-[ext_resource path="res://assets/textures/animations/smoke1.png" type="Texture" id=31]
-[ext_resource path="res://assets/textures/animations/smoke2.png" type="Texture" id=32]
-[ext_resource path="res://assets/textures/animations/smoke4.png" type="Texture" id=33]
-[ext_resource path="res://assets/textures/animations/smoke3.png" type="Texture" id=34]
-[ext_resource path="res://assets/textures/animations/desk1.png" type="Texture" id=35]
-[ext_resource path="res://assets/textures/animations/desk2.png" type="Texture" id=36]
-[ext_resource path="res://assets/textures/animations/desk4.png" type="Texture" id=37]
-[ext_resource path="res://assets/textures/animations/desk3.png" type="Texture" id=38]
+[ext_resource path="res://assets/textures/clock.png" type="Texture" id=23]
+[ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/rain-06.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/textures/environment/furniture/food.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/environment/furniture/clothesBasket.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/environment/furniture/flower.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/environment/furniture/postits.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/animations/smoke1.png" type="Texture" id=30]
+[ext_resource path="res://assets/textures/animations/smoke2.png" type="Texture" id=31]
+[ext_resource path="res://assets/textures/animations/smoke4.png" type="Texture" id=32]
+[ext_resource path="res://assets/textures/animations/smoke3.png" type="Texture" id=33]
+[ext_resource path="res://assets/textures/animations/desk1.png" type="Texture" id=34]
+[ext_resource path="res://assets/textures/animations/desk2.png" type="Texture" id=35]
+[ext_resource path="res://assets/textures/animations/desk4.png" type="Texture" id=36]
+[ext_resource path="res://assets/textures/animations/desk3.png" type="Texture" id=37]
+[ext_resource path="res://src/environment/Furniture.gd" type="Script" id=38]
 [ext_resource path="res://assets/textures/animations/washing3.png" type="Texture" id=39]
 [ext_resource path="res://assets/textures/animations/washing1.png" type="Texture" id=40]
 [ext_resource path="res://assets/textures/animations/washing2.png" type="Texture" id=41]
@@ -64,22 +64,6 @@
 [ext_resource path="res://assets/textures/animations/washing14.png" type="Texture" id=62]
 [ext_resource path="res://assets/textures/animations/washing27.png" type="Texture" id=63]
 [ext_resource path="res://assets/textures/animations/washing18.png" type="Texture" id=64]
-[ext_resource path="res://assets/textures/clock.png" type="Texture" id=23]
-[ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=24]
-[ext_resource path="res://assets/sounds/rain-06.wav" type="AudioStream" id=25]
-[ext_resource path="res://assets/textures/environment/furniture/food.png" type="Texture" id=26]
-[ext_resource path="res://assets/textures/environment/furniture/clothesBasket.png" type="Texture" id=27]
-[ext_resource path="res://assets/textures/environment/furniture/flower.png" type="Texture" id=28]
-[ext_resource path="res://assets/textures/environment/furniture/postits.png" type="Texture" id=29]
-[ext_resource path="res://assets/textures/animations/smoke1.png" type="Texture" id=30]
-[ext_resource path="res://assets/textures/animations/smoke2.png" type="Texture" id=31]
-[ext_resource path="res://assets/textures/animations/smoke4.png" type="Texture" id=32]
-[ext_resource path="res://assets/textures/animations/smoke3.png" type="Texture" id=33]
-[ext_resource path="res://assets/textures/animations/desk1.png" type="Texture" id=34]
-[ext_resource path="res://assets/textures/animations/desk2.png" type="Texture" id=35]
-[ext_resource path="res://assets/textures/animations/desk4.png" type="Texture" id=36]
-[ext_resource path="res://assets/textures/animations/desk3.png" type="Texture" id=37]
-[ext_resource path="res://src/environment/Furniture.gd" type="Script" id=38]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 23.5 )
@@ -175,7 +159,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -199,7 +183,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -236,7 +220,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 23
+frame = 6
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]

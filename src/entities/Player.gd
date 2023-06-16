@@ -70,14 +70,14 @@ func change_stress_signs(value: int):
 		stress_level = 2
 		$AnimationPlayer.play("squash", -1, 2)
 		eyes_front = eyes2
-		eyes_left = eyes1_left
-		eyes_right = eyes1_right
+		eyes_left = eyes2_left
+		eyes_right = eyes2_right
 	if value >= 66 && stress_level != 3:
 		stress_level = 3
 		$AnimationPlayer.play("squash", 0, 4)
 		eyes_front = eyes3
-		eyes_left = eyes1_left
-		eyes_right = eyes1_right
+		eyes_left = eyes3_left
+		eyes_right = eyes3_right
 
 
 func _on_Child_player_baby_toggle(value):
