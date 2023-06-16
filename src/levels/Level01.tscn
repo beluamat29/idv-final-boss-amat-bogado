@@ -220,7 +220,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 6
+frame = 8
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -273,6 +273,7 @@ valign = 1
 script = SubResource( 7 )
 
 [node name="StressBar" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 15 )
