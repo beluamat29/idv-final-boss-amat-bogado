@@ -27,6 +27,7 @@ func _on_GenericFurniture_input_event(viewport, event, shape_idx):
 func _on_GenericFurniture_task_finished(id):
 	objectWasPressed(id)
 	stress_bar._change_stress_bar(-10)
+	player.busy = false
 
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
@@ -39,5 +40,4 @@ func _on_Child_crying():
 	
 func _on_Child_player_baby_toggle(value):
 	stress_bar.increased_stress = 1
-	
 

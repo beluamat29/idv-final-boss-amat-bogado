@@ -5,6 +5,7 @@
 [ext_resource path="res://src/levels/UI.gd" type="Script" id=3]
 [ext_resource path="res://src/levels/LevelManager.gd" type="Script" id=4]
 
+
 [node name="LevelManager" type="Node"]
 script = ExtResource( 4 )
 level = ExtResource( 2 )
