@@ -220,14 +220,15 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 8
+frame = 25
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
 position = Vector2( 385, 497 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 4 )]
-position = Vector2( 489, 447 )
+position = Vector2( 493, 454 )
+scale = Vector2( 0.5, 0.5 )
 z_index = 1
 
 [node name="TaskList" type="TextureRect" parent="."]
