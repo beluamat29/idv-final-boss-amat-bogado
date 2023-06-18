@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=18]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/sounds/typing.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/textures/environment/furniture/table.png" type="Texture" id=21]
 [ext_resource path="res://assets/sounds/washing-machine.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/textures/entities/clockbody.png" type="Texture" id=23]
 [ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=24]
@@ -66,6 +67,10 @@
 [ext_resource path="res://assets/textures/environment/furniture/shelf2.png" type="Texture" id=65]
 [ext_resource path="res://assets/textures/entities/handshours.png" type="Texture" id=66]
 [ext_resource path="res://assets/textures/entities/handsminutes.png" type="Texture" id=67]
+[ext_resource path="res://assets/textures/coffee.png" type="Texture" id=68]
+[ext_resource path="res://assets/textures/sparkles.png" type="Texture" id=69]
+[ext_resource path="res://src/levels/CoffeeTable.gd" type="Script" id=70]
+[ext_resource path="res://src/levels/Sparkles.gd" type="Script" id=71]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -100,6 +105,43 @@ animations = [ {
 "name": "washing",
 "speed": 100.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 34, 24 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "bright"
+length = 1.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.0514204, 0.0425717 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "bright"
+length = 1.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.0514204, 0.0425717 ), Vector2( 0, 0 ) ]
+}
 
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
@@ -220,14 +262,14 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 18
+frame = 25
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
-position = Vector2( 383, 451 )
+position = Vector2( 363, 451 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 4 )]
-position = Vector2( 490, 411 )
+position = Vector2( 669, 414 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
 
@@ -240,6 +282,49 @@ texture = ExtResource( 16 )
 position = Vector2( 770, 258 )
 scale = Vector2( 0.283203, 0.234375 )
 texture = ExtResource( 65 )
+
+[node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
+position = Vector2( 484, 453 )
+script = ExtResource( 70 )
+
+[node name="CoffeeArea" type="Area2D" parent="Environment/Entities/CoffeeTable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/CoffeeTable/CoffeeArea"]
+position = Vector2( -8, -31 )
+shape = SubResource( 14 )
+
+[node name="Coffee" type="Sprite" parent="Environment/Entities/CoffeeTable/CoffeeArea"]
+visible = false
+position = Vector2( -7, -42 )
+scale = Vector2( 0.105469, 0.0996094 )
+texture = ExtResource( 68 )
+
+[node name="Table" type="Sprite" parent="Environment/Entities/CoffeeTable"]
+position = Vector2( -7.75, 20 )
+scale = Vector2( 0.176758, 0.240234 )
+texture = ExtResource( 21 )
+
+[node name="Sparkles" type="Node2D" parent="Environment/Entities/CoffeeTable"]
+visible = false
+script = ExtResource( 71 )
+
+[node name="Sparkle1" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
+position = Vector2( 15.1914, -60.8145 )
+rotation = 4.6919
+scale = Vector2( 0.0311618, 0.0257994 )
+texture = ExtResource( 69 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkle1"]
+anims/bright = SubResource( 15 )
+
+[node name="Sparkle2" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
+position = Vector2( -31, -44 )
+rotation = 1.54088
+scale = Vector2( 0.00857006, 0.00709529 )
+texture = ExtResource( 69 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkle2"]
+anims/bright = SubResource( 16 )
 
 [node name="TaskList" type="TextureRect" parent="."]
 margin_left = 71.0
@@ -336,3 +421,5 @@ nine_patch_stretch = true
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
+
+[editable path="Environment/Entities/Furniture/Desk"]
