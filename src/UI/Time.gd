@@ -13,7 +13,6 @@ func _ready():
 	
 func _on_Countdown_timeout():
 	if(tiempoTotal < 660):
-		print(tiempoTotal)
 		tiempoTotal += 5
 		if(tiempoTotal%60 == 0):
 			pivotHours.rotation_degrees += 30
