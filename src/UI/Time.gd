@@ -1,7 +1,6 @@
 extends Node
 
 var tiempoTotal = 300 #segundos
-onready var label:Label = $TimeLeft
 onready var pivotHours:Position2D = $PivotHours
 onready var pivotMinutes:Position2D = $PivotMinutes
 
