@@ -5,6 +5,7 @@ onready var pivotHours:Position2D = $PivotHours
 onready var pivotMinutes:Position2D = $PivotMinutes
 
 signal game_over
+signal end_sunset
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,3 +21,8 @@ func _on_Countdown_timeout():
 		get_tree().paused = true
 		emit_signal("game_over")
 		
+	if _hour() == 18:
+		emit_signal("end_sunset")
+		
+func _hour():
+	return tiempoTotal / 30
