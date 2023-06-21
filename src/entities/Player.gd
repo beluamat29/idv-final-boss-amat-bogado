@@ -6,8 +6,10 @@ onready var target = position
 onready var sprite:AnimatedSprite = $Sprite
 onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
+onready var drinkingCoffee:bool = false
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
+var COFFEE_RELAX_VALUE: int = 10
 var busy: bool = false
 export var eyes1: Texture
 export var eyes2: Texture
@@ -31,24 +33,31 @@ func _ready():
 	$AnimationPlayer.play("squash")
 
 func _physics_process(delta):
-	velocity.x = position.direction_to(target).x * speed
-	if abs(position.x - target.x) > 5:
-		velocity = move_and_slide(velocity)
-		if target.x - position.x < 0:
-			sprite.play("walk_left")
-			eyes.show()
-			eyes.texture = eyes_right
-		else:
-			sprite.play("walk_right")
-			eyes.show()
-			eyes.texture = eyes_left
-	elif busy || with_baby:
-		sprite.play("busy")
-		eyes.hide()
-	else:
-		sprite.play("default")
-		eyes.show()
+	if(drinkingCoffee):
 		eyes.texture = eyes_front
+		sprite.play("drinking")
+		yield(get_tree().create_timer(6), "timeout")
+		drinkingCoffee = false
+		change_stress_signs(stress_level - COFFEE_RELAX_VALUE)
+	else:
+		velocity.x = position.direction_to(target).x * speed
+		if abs(position.x - target.x) > 5:
+			velocity = move_and_slide(velocity)
+			if target.x - position.x < 0:
+				sprite.play("walk_left")
+				eyes.show()
+				eyes.texture = eyes_right
+			else:
+				sprite.play("walk_right")
+				eyes.show()
+				eyes.texture = eyes_left
+		elif busy || with_baby:
+			sprite.play("busy")
+			eyes.hide()
+		else:
+			sprite.play("default")
+			eyes.show()
+			eyes.texture = eyes_front
 	
 func set_target():
 	if !with_baby:
@@ -86,3 +95,11 @@ func _on_Child_player_baby_toggle(value):
 
 func _on_task_in_progress(probability):
 	busy = true
+
+
+func _on_CoffeeTable_drinking_coffee():
+	set_target()
+	
+
+func _on_CoffeeArea_body_entered(body):
+	drinkingCoffee = true

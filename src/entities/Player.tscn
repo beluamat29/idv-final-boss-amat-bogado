@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/playeridle.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/textures/entities/eyes3right.png" type="Texture" id=12]
 [ext_resource path="res://assets/textures/entities/eyes2left.png" type="Texture" id=13]
 [ext_resource path="res://assets/textures/entities/eyes3left.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/entities/drinkingcoffee.png" type="Texture" id=15]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -30,6 +31,11 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "drinking",
+"speed": 1.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 8 ) ],
 "loop": true,
@@ -133,6 +139,7 @@ shape = SubResource( 1 )
 position = Vector2( -1.37499, 0 )
 scale = Vector2( 0.764925, 0.738411 )
 frames = SubResource( 4 )
+animation = "drinking"
 playing = true
 
 [node name="Eyes" type="Sprite" parent="Sprite"]

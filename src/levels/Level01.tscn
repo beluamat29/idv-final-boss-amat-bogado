@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -71,6 +71,7 @@
 [ext_resource path="res://assets/textures/sparkles.png" type="Texture" id=69]
 [ext_resource path="res://src/levels/CoffeeTable.gd" type="Script" id=70]
 [ext_resource path="res://src/levels/Sparkles.gd" type="Script" id=71]
+[ext_resource path="res://src/levels/CoffeeArea.gd" type="Script" id=72]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -203,6 +204,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -226,6 +228,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -262,7 +265,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 25
+frame = 5
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -288,6 +291,7 @@ position = Vector2( 484, 453 )
 script = ExtResource( 70 )
 
 [node name="CoffeeArea" type="Area2D" parent="Environment/Entities/CoffeeTable"]
+script = ExtResource( 72 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/CoffeeTable/CoffeeArea"]
 position = Vector2( -8, -31 )
@@ -311,7 +315,7 @@ script = ExtResource( 71 )
 [node name="Sparkle1" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
 position = Vector2( 15.1914, -60.8145 )
 rotation = 4.6919
-scale = Vector2( 0.0311618, 0.0257994 )
+scale = Vector2( 0.0362898, 0.0300449 )
 texture = ExtResource( 69 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkle1"]
@@ -415,6 +419,10 @@ nine_patch_stretch = true
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
+[connection signal="drinking_coffee" from="Environment/Entities/CoffeeTable" to="Environment/Entities/Player" method="_on_CoffeeTable_drinking_coffee"]
+[connection signal="body_entered" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/Player" method="_on_CoffeeArea_body_entered"]
+[connection signal="body_entered" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/CoffeeTable" method="_on_CoffeeArea_body_entered"]
+[connection signal="input_event" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/CoffeeTable" method="_on_CoffeeArea_input_event"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]

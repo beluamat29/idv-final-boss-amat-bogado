@@ -2,6 +2,7 @@ extends Node2D
 
 onready var sparkle1: AnimationPlayer = $Sparkle1/AnimationPlayer
 onready var sparkle2: AnimationPlayer = $Sparkle2/AnimationPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
