@@ -204,7 +204,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -228,7 +227,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -265,7 +263,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 5
+frame = 1
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -419,7 +417,8 @@ nine_patch_stretch = true
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
-[connection signal="drinking_coffee" from="Environment/Entities/CoffeeTable" to="Environment/Entities/Player" method="_on_CoffeeTable_drinking_coffee"]
+[connection signal="drink_coffee" from="Environment/Entities/CoffeeTable" to="Environment/Entities/Player" method="_on_CoffeeTable_drink_coffee"]
+[connection signal="go_to_coffee" from="Environment/Entities/CoffeeTable" to="Environment/Entities/Player" method="_on_CoffeeTable_go_to_coffee"]
 [connection signal="body_entered" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/Player" method="_on_CoffeeArea_body_entered"]
 [connection signal="body_entered" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/CoffeeTable" method="_on_CoffeeArea_body_entered"]
 [connection signal="input_event" from="Environment/Entities/CoffeeTable/CoffeeArea" to="Environment/Entities/CoffeeTable" method="_on_CoffeeArea_input_event"]

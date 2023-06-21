@@ -6,7 +6,8 @@ onready var coffeeArea: Area2D = $CoffeeArea
 onready var coffeeToDrink:bool = false
 # Called when the node enters the scene tree for the first time.
 
-signal drinking_coffee()
+signal go_to_coffee()
+signal drink_coffee()
 
 func showCoffe():
 	coffee.visible = true
@@ -17,11 +18,12 @@ func showCoffe():
 
 func _on_CoffeeArea_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed) && coffeeToDrink:
-		emit_signal('drinking_coffee')
+		emit_signal('go_to_coffee')
 
 
 func _on_CoffeeArea_body_entered(body):
 	if(coffeeToDrink):
+		emit_signal('drink_coffee')
 		coffee.visible = false
 		sparkles.visible = false
 		coffeeToDrink = false

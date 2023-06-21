@@ -96,10 +96,9 @@ func _on_Child_player_baby_toggle(value):
 func _on_task_in_progress(probability):
 	busy = true
 
-
-func _on_CoffeeTable_drinking_coffee():
+func _on_CoffeeTable_go_to_coffee():
 	set_target()
-	
 
-func _on_CoffeeArea_body_entered(body):
+
+func _on_CoffeeTable_drink_coffee():
 	drinkingCoffee = true
