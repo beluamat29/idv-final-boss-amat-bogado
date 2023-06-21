@@ -6,6 +6,7 @@ onready var target = position
 onready var sprite:AnimatedSprite = $Sprite
 onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
+onready var thought: Sprite = $Thought
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
 var busy: bool = false
@@ -86,3 +87,7 @@ func _on_Child_player_baby_toggle(value):
 
 func _on_task_in_progress(probability):
 	busy = true
+
+
+func _on_Timer_timeout():
+	thought.hide()

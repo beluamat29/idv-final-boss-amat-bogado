@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -13,13 +13,14 @@
 [ext_resource path="res://assets/textures/environment/furniture/plant.png" type="Texture" id=11]
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=12]
 [ext_resource path="res://src/entities/Child.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/textures/environment/whiteboard.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/environment/thought-clouds.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/furniture/shelf-1.png" type="Texture" id=16]
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=17]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=18]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/sounds/typing.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/fonts/Baby Doll.otf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/sounds/washing-machine.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/textures/entities/clockbody.png" type="Texture" id=23]
 [ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=24]
@@ -66,6 +67,10 @@
 [ext_resource path="res://assets/textures/environment/furniture/shelf2.png" type="Texture" id=65]
 [ext_resource path="res://assets/textures/entities/handshours.png" type="Texture" id=66]
 [ext_resource path="res://assets/textures/entities/handsminutes.png" type="Texture" id=67]
+[ext_resource path="res://assets/textures/environment/furniture/window.png" type="Texture" id=68]
+[ext_resource path="res://src/levels/CanvasModulate.gd" type="Script" id=69]
+[ext_resource path="res://assets/textures/environment/light.png" type="Texture" id=70]
+[ext_resource path="res://src/levels/Light2D4.gd" type="Script" id=71]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -75,7 +80,10 @@ colors = PoolColorArray( 1, 0.929989, 0.739958, 1, 1, 0.917647, 0.694118, 1 )
 gradient = SubResource( 13 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 511, 23.5 )
+extents = Vector2( 511, 45.75 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 173.317, 90.5192 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -101,8 +109,15 @@ animations = [ {
 "speed": 100.0
 } ]
 
+[sub_resource type="DynamicFont" id=5]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 21 )
+
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 217.0, 338.0 ]
+}
 
 [node name="Background2" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -115,11 +130,21 @@ expand = true
 
 [node name="Environment" type="Node2D" parent="."]
 
+[node name="Light2D4" type="Light2D" parent="Environment"]
+visible = false
+position = Vector2( 530.664, 225.813 )
+scale = Vector2( 1.91043, 1.36841 )
+texture = ExtResource( 70 )
+offset = Vector2( -1.65632, 44.7514 )
+energy = 0.8
+script = ExtResource( 71 )
+
 [node name="Floor2" type="StaticBody2D" parent="Environment"]
 position = Vector2( 510, 581 )
 input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Floor2"]
+position = Vector2( 0, -22.25 )
 shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Floor2"]
@@ -132,12 +157,45 @@ texture = ExtResource( 18 )
 [node name="RightWall2" parent="Environment" instance=ExtResource( 19 )]
 position = Vector2( 1024, 301 )
 
+[node name="Window2" type="Sprite" parent="Environment"]
+position = Vector2( 565.809, 278.117 )
+scale = Vector2( 0.194568, 0.237824 )
+texture = ExtResource( 68 )
+
+[node name="Window" type="Sprite" parent="Environment"]
+position = Vector2( 321, 278 )
+scale = Vector2( 0.192383, 0.234375 )
+texture = ExtResource( 68 )
+
+[node name="Shelf" type="Sprite" parent="Environment"]
+position = Vector2( 122, 279 )
+scale = Vector2( 0.216797, 0.177734 )
+texture = ExtResource( 16 )
+
+[node name="Shelf2" type="Sprite" parent="Environment"]
+position = Vector2( 770, 258 )
+scale = Vector2( 0.283203, 0.234375 )
+texture = ExtResource( 65 )
+
 [node name="Entities" type="Node2D" parent="Environment"]
 
-[node name="Fridge" type="Sprite" parent="Environment/Entities"]
+[node name="Fridge" type="Area2D" parent="Environment/Entities"]
 position = Vector2( 936, 423 )
 scale = Vector2( 0.314453, 0.353516 )
+
+[node name="FridgeBody" type="Sprite" parent="Environment/Entities/Fridge"]
+scale = Vector2( 1, 1 )
 texture = ExtResource( 8 )
+
+[node name="PostIt" type="Sprite" parent="Environment/Entities/Fridge/FridgeBody"]
+position = Vector2( 3.17969, -161.237 )
+scale = Vector2( 0.220497, 0.168509 )
+texture = ExtResource( 29 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Fridge"]
+position = Vector2( -1.59009, -164.066 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 14 )
 
 [node name="Furniture" type="Node2D" parent="Environment/Entities"]
 script = ExtResource( 38 )
@@ -161,6 +219,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -184,6 +243,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -220,7 +280,6 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 18
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -231,31 +290,31 @@ position = Vector2( 490, 411 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
 
-[node name="Shelf" type="Sprite" parent="Environment/Entities"]
-position = Vector2( 486, 250 )
-scale = Vector2( 0.216797, 0.177734 )
-texture = ExtResource( 16 )
-
-[node name="Shelf2" type="Sprite" parent="Environment/Entities"]
-position = Vector2( 770, 258 )
-scale = Vector2( 0.283203, 0.234375 )
-texture = ExtResource( 65 )
-
 [node name="TaskList" type="TextureRect" parent="."]
-margin_left = 71.0
-margin_top = 70.0
-margin_right = 371.0
-margin_bottom = 370.0
+visible = false
+margin_left = 541.0
+margin_top = 6.0
+margin_right = 893.0
+margin_bottom = 348.0
 mouse_filter = 2
 texture = ExtResource( 14 )
 expand = true
 script = ExtResource( 17 )
 
+[node name="Label" type="Label" parent="TaskList"]
+margin_left = 61.0
+margin_top = 47.0
+margin_right = 289.0
+margin_bottom = 63.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Tengo que hacer estas tareas:"
+
 [node name="ItemsList" type="VBoxContainer" parent="TaskList"]
-margin_left = 31.0
-margin_top = 24.0
-margin_right = 276.0
-margin_bottom = 212.0
+margin_left = 58.0
+margin_top = 59.0
+margin_right = 290.0
+margin_bottom = 220.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
@@ -263,7 +322,7 @@ script = ExtResource( 2 )
 script = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="Time"]
-position = Vector2( 800.29, 108.736 )
+position = Vector2( 101.4, 87.4 )
 scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 23 )
 
@@ -271,7 +330,7 @@ texture = ExtResource( 23 )
 autostart = true
 
 [node name="PivotMinutes" type="Position2D" parent="Time"]
-position = Vector2( 800, 109 )
+position = Vector2( 101.11, 87.664 )
 
 [node name="HandsMinutes" type="Sprite" parent="Time/PivotMinutes"]
 position = Vector2( -8, -28 )
@@ -280,7 +339,7 @@ texture = ExtResource( 66 )
 centered = false
 
 [node name="PivotHours" type="Position2D" parent="Time"]
-position = Vector2( 800, 109 )
+position = Vector2( 101.11, 87.664 )
 rotation = -1.0472
 
 [node name="PivotHours" type="Sprite" parent="Time/PivotHours"]
@@ -305,7 +364,16 @@ texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 3 )
 nine_patch_stretch = true
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2( -1, 1 )
+color = Color( 1, 0.945098, 0.815686, 1 )
+script = ExtResource( 69 )
+clockNodePath = NodePath("../Time")
+
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="body_entered" from="Environment/Entities/Fridge" to="." method="_on_Fridge_body_entered"]
+[connection signal="body_exited" from="Environment/Entities/Fridge" to="." method="_on_Fridge_body_exited"]
+[connection signal="input_event" from="Environment/Entities/Fridge" to="." method="_on_Fridge_input_event"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
@@ -331,8 +399,10 @@ nine_patch_stretch = true
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
+[connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
+[connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
