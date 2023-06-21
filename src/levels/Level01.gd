@@ -1,6 +1,7 @@
 extends Node
 
 onready var tasksList = $TaskList/ItemsList
+onready var tasks = $TaskList
 onready var stress_bar: Control = $StressBar
 onready var furniture: Node2D = $Environment/Entities/Furniture
 onready var player: KinematicBody2D = $Environment/Entities/Player
@@ -44,3 +45,14 @@ func _on_Child_crying():
 func _on_Child_player_baby_toggle(value):
 	stress_bar.increased_stress = 1
 
+func _on_Fridge_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		player.set_target()
+
+func _on_Fridge_body_entered(body):
+	tasks.show()
+	player.busy = true
+
+func _on_Fridge_body_exited(body):
+	tasks.hide()
+	player.busy = false

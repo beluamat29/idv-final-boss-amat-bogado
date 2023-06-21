@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/playeridle.png" type="Texture" id=2]
@@ -15,10 +15,12 @@
 [ext_resource path="res://assets/textures/entities/eyes2left.png" type="Texture" id=13]
 [ext_resource path="res://assets/textures/entities/eyes3left.png" type="Texture" id=14]
 [ext_resource path="res://assets/textures/entities/drinking.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/environment/thought-clouds.png" type="Texture" id=15]
+[ext_resource path="res://assets/fonts/Baby Doll.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 42.5 )
+extents = Vector2( 41.5, 209 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -117,6 +119,10 @@ tracks/1/keys = {
 "values": [ Vector2( 0.644928, 0.743671 ), Vector2( 0.78, 0.77 ) ]
 }
 
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 16 )
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 510, 500 )
 collision_layer = 2
@@ -132,7 +138,7 @@ eyes3_left = ExtResource( 12 )
 eyes3_right = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 66.5 )
+position = Vector2( -0.5, -3 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -150,3 +156,26 @@ texture = ExtResource( 19 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/squash = SubResource( 2 )
+
+[node name="Thought" type="Sprite" parent="."]
+position = Vector2( -307, -392 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Thought"]
+margin_left = -153.0
+margin_top = -144.0
+margin_right = 154.0
+margin_bottom = 75.0
+size_flags_stretch_ratio = 0.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Tengo que terminar las tareas que tengo anotadas en la heladera antes de que termine el dia"
+align = 1
+autowrap = true
+
+[node name="Timer" type="Timer" parent="Thought"]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Thought/Timer" to="." method="_on_Timer_timeout"]

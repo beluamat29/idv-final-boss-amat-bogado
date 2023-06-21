@@ -7,6 +7,7 @@ onready var sprite:AnimatedSprite = $Sprite
 onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
 onready var drinkingCoffee:bool = false
+onready var thought: Sprite = $Thought
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
 var COFFEE_RELAX_VALUE: int = 10
@@ -102,3 +103,7 @@ func _on_CoffeeTable_go_to_coffee():
 
 func _on_CoffeeTable_drink_coffee():
 	drinkingCoffee = true
+
+func _on_Timer_timeout():
+	thought.hide()
+
