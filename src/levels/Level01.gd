@@ -32,7 +32,7 @@ func _on_GenericFurniture_task_finished(id):
 
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
-	if(value == 40):
+	if(value == 5):
 		coffeTable.showCoffe()
 
 func _on_Child_set_player_target():
