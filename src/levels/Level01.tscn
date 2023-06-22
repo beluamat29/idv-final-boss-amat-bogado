@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -71,6 +71,11 @@
 [ext_resource path="res://src/levels/CanvasModulate.gd" type="Script" id=69]
 [ext_resource path="res://assets/textures/environment/light.png" type="Texture" id=70]
 [ext_resource path="res://src/levels/Light2D4.gd" type="Script" id=71]
+[ext_resource path="res://assets/textures/environment/furniture/coffeetable.png" type="Texture" id=72]
+[ext_resource path="res://assets/textures/environment/coffee.png" type="Texture" id=73]
+[ext_resource path="res://assets/textures/environment/sparkles.png" type="Texture" id=74]
+[ext_resource path="res://src/levels/CoffeeTable.gd" type="Script" id=75]
+[ext_resource path="res://src/levels/Sparkles.gd" type="Script" id=76]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -108,6 +113,41 @@ animations = [ {
 "name": "washing",
 "speed": 100.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 18, 16.75 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "bright"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.0488281, 0.0556641 ), Vector2( 0, 0 ), Vector2( 0.0488281, 0.0556641 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "bright"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.0537109, 0.0629883 ), Vector2( 0, 0 ), Vector2( 0.0537109, 0.0629883 ) ]
+}
 
 [sub_resource type="DynamicFont" id=5]
 outline_color = Color( 0, 0, 0, 1 )
@@ -184,7 +224,6 @@ position = Vector2( 936, 423 )
 scale = Vector2( 0.314453, 0.353516 )
 
 [node name="FridgeBody" type="Sprite" parent="Environment/Entities/Fridge"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 8 )
 
 [node name="PostIt" type="Sprite" parent="Environment/Entities/Fridge/FridgeBody"]
@@ -194,7 +233,6 @@ texture = ExtResource( 29 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Fridge"]
 position = Vector2( -1.59009, -164.066 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 14 )
 
 [node name="Furniture" type="Node2D" parent="Environment/Entities"]
@@ -219,7 +257,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -243,7 +281,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -283,12 +321,52 @@ animation = "washing"
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
-position = Vector2( 383, 451 )
+position = Vector2( 370, 451 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 4 )]
-position = Vector2( 490, 411 )
+position = Vector2( 695, 402 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
+
+[node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
+position = Vector2( 476, 475 )
+script = ExtResource( 75 )
+
+[node name="Table" type="Sprite" parent="Environment/Entities/CoffeeTable"]
+scale = Vector2( 0.147461, 0.231445 )
+texture = ExtResource( 72 )
+
+[node name="Coffee" type="Area2D" parent="Environment/Entities/CoffeeTable"]
+visible = false
+
+[node name="CoffeeImage" type="Sprite" parent="Environment/Entities/CoffeeTable/Coffee"]
+position = Vector2( 3.875, -61.25 )
+scale = Vector2( 0.0981445, 0.0927735 )
+texture = ExtResource( 73 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/CoffeeTable/Coffee"]
+position = Vector2( 2, -56.25 )
+shape = SubResource( 15 )
+
+[node name="Sparkles" type="Node2D" parent="Environment/Entities/CoffeeTable"]
+visible = false
+script = ExtResource( 76 )
+
+[node name="Sparkles1" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
+position = Vector2( -16, -43 )
+scale = Vector2( 0.0488281, 0.0556641 )
+texture = ExtResource( 74 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkles1"]
+anims/bright = SubResource( 16 )
+
+[node name="Sparkles2" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
+position = Vector2( 17.25, -66.875 )
+scale = Vector2( 0.0372822, 0.0437219 )
+texture = ExtResource( 74 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkles2"]
+anims/bright = SubResource( 17 )
 
 [node name="TaskList" type="TextureRect" parent="."]
 visible = false
@@ -398,6 +476,10 @@ clockNodePath = NodePath("../Time")
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
+[connection signal="coffee_finished" from="Environment/Entities/Player" to="Environment/Entities/CoffeeTable" method="_on_Player_coffee_finished"]
+[connection signal="coffee_finished" from="Environment/Entities/Player" to="StressBar" method="_on_Player_coffee_finished"]
+[connection signal="body_entered" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_body_entered"]
+[connection signal="input_event" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_input_event"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]

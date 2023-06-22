@@ -5,7 +5,8 @@ onready var tasks = $TaskList
 onready var stress_bar: Control = $StressBar
 onready var furniture: Node2D = $Environment/Entities/Furniture
 onready var player: KinematicBody2D = $Environment/Entities/Player
-
+onready var coffeeTable = $Environment/Entities/CoffeeTable
+var SHOW_COFFE_VALUE = 40
 signal victory
 signal game_over
 
@@ -32,6 +33,9 @@ func _on_GenericFurniture_task_finished(id):
 
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
+	if(value == SHOW_COFFE_VALUE):
+		coffeeTable.displayCoffee()
+		player.coffeIsAvailable()
 
 func _on_Child_set_player_target():
 	player.set_target()
