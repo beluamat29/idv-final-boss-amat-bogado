@@ -3,6 +3,8 @@ extends Node
 var tiempoTotal = 300 #segundos
 onready var pivotHours:Position2D = $PivotHours
 onready var pivotMinutes:Position2D = $PivotMinutes
+onready var music: AudioStreamPlayer = $Background
+export var night_music: AudioStream
 
 signal game_over
 signal end_sunset
@@ -22,6 +24,9 @@ func _on_Countdown_timeout():
 		emit_signal("game_over")
 		
 	if _hour() == 18:
+		music.stop()
+		music.stream = night_music
+		music.play()
 		emit_signal("end_sunset")
 		
 func _hour():

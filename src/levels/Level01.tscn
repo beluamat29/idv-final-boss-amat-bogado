@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -76,6 +76,9 @@
 [ext_resource path="res://assets/textures/environment/sparkles.png" type="Texture" id=74]
 [ext_resource path="res://src/levels/CoffeeTable.gd" type="Script" id=75]
 [ext_resource path="res://src/levels/Sparkles.gd" type="Script" id=76]
+[ext_resource path="res://assets/sounds/clock.wav" type="AudioStream" id=77]
+[ext_resource path="res://assets/sounds/morning.wav" type="AudioStream" id=78]
+[ext_resource path="res://assets/sounds/night.wav" type="AudioStream" id=79]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -257,7 +260,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -281,7 +284,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -318,6 +321,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
+frame = 17
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -362,7 +366,7 @@ anims/bright = SubResource( 16 )
 
 [node name="Sparkles2" type="Sprite" parent="Environment/Entities/CoffeeTable/Sparkles"]
 position = Vector2( 17.25, -66.875 )
-scale = Vector2( 0.0372822, 0.0437219 )
+scale = Vector2( 0.0537109, 0.0629883 )
 texture = ExtResource( 74 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/CoffeeTable/Sparkles/Sparkles2"]
@@ -398,6 +402,12 @@ script = ExtResource( 2 )
 
 [node name="Time" type="Node" parent="."]
 script = ExtResource( 7 )
+night_music = ExtResource( 79 )
+
+[node name="Background" type="AudioStreamPlayer" parent="Time"]
+stream = ExtResource( 78 )
+volume_db = -30.0
+autoplay = true
 
 [node name="Sprite" type="Sprite" parent="Time"]
 position = Vector2( 101.4, 87.4 )
@@ -425,6 +435,11 @@ position = Vector2( -7.11914, -22.4658 )
 scale = Vector2( 0.337896, 0.277778 )
 texture = ExtResource( 67 )
 centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Time"]
+stream = ExtResource( 77 )
+autoplay = true
+bus = "Background"
 
 [node name="StressBar" type="Control" parent="."]
 visible = false
