@@ -8,3 +8,6 @@ func displayAndPlayAnimation():
 	yield(get_tree().create_timer(0.2), "timeout")
 	sparkles2Animation.play("bright")
 	self.visible = true
+
+func hideSparkles():
+	self.visible = false

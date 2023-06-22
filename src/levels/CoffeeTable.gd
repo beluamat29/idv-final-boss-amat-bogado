@@ -11,3 +11,9 @@ func displayCoffee():
 	sparkles.displayAndPlayAnimation()
 	displayCoffee.visible = true
 	
+func _on_Player_coffee_finished():
+	hideCoffee()
+
+func hideCoffee():
+	sparkles.hideSparkles()
+	displayCoffee.visible = false

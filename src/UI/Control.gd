@@ -17,3 +17,7 @@ func _change_stress_bar(value) -> void:
 
 func _on_Countdown_timeout():
 	_change_stress_bar(increased_stress)
+
+
+func _on_Player_coffee_finished():
+	_change_stress_bar(-10)

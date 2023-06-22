@@ -257,7 +257,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -281,7 +281,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -318,7 +318,6 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 19
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -477,6 +476,10 @@ clockNodePath = NodePath("../Time")
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
+[connection signal="coffee_finished" from="Environment/Entities/Player" to="Environment/Entities/CoffeeTable" method="_on_Player_coffee_finished"]
+[connection signal="coffee_finished" from="Environment/Entities/Player" to="StressBar" method="_on_Player_coffee_finished"]
+[connection signal="body_entered" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_body_entered"]
+[connection signal="input_event" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_input_event"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
