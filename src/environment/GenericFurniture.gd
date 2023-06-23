@@ -46,13 +46,12 @@ func _on_GenericFurniture_body_entered(body):
 
 func _on_GenericFurniture_body_exited(body):
 	if task_in_progress:
+		player.busy = false
+		task_in_progress = false
 		audio.stop()
 		toggleAnimation(false)
 		task_activated = false
-		task_in_progress = false
-		body_entered = false
-		player.busy = false
-		progress_bar.hide()
+	body_entered = false
 
 func _on_GenericFurniture_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed) && !tasks.empty():
