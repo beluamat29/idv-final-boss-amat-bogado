@@ -8,6 +8,7 @@ onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
 onready var canDrinkCoffee: bool = false
 onready var thought: Sprite = $Thought
+onready var sfx_sound: AudioStreamPlayer = $SFX
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
 var busy: bool = false
@@ -117,6 +118,8 @@ func _on_Coffee_input_event(viewport, event, shape_idx):
 		coffeeWasClicked = true
 
 func drinkCoffee():
+	if !sfx_sound.playing:
+		sfx_sound.play()
 	eyes.texture = eyes_front
 	sprite.play("drinking")
 	yield(get_tree().create_timer(6), "timeout")

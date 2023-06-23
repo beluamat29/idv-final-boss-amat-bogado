@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/playeridle.png" type="Texture" id=2]
@@ -17,13 +17,20 @@
 [ext_resource path="res://assets/textures/environment/thought-clouds.png" type="Texture" id=15]
 [ext_resource path="res://assets/fonts/Baby Doll.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/textures/entities/drinking.png" type="Texture" id=17]
+[ext_resource path="res://assets/sounds/slurping.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=19]
+[ext_resource path="res://assets/sounds/breathing.wav" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.5, 209 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "busy",
@@ -118,6 +125,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.644928, 0.743671 ), Vector2( 0.78, 0.77 ) ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AnimationPlayer/Breath")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 20 )
+} ],
+"times": PoolRealArray( 0.83 )
+}
 
 [sub_resource type="DynamicFont" id=5]
 size = 32
@@ -145,8 +166,6 @@ shape = SubResource( 1 )
 position = Vector2( -1.37499, 0 )
 scale = Vector2( 0.764925, 0.738411 )
 frames = SubResource( 4 )
-animation = "drinking"
-frame = 1
 playing = true
 
 [node name="Eyes" type="Sprite" parent="Sprite"]
@@ -157,6 +176,11 @@ texture = ExtResource( 19 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/squash = SubResource( 2 )
+
+[node name="Breath" type="AudioStreamPlayer" parent="AnimationPlayer"]
+stream = ExtResource( 20 )
+volume_db = -15.28
+bus = "Sfx"
 
 [node name="Thought" type="Sprite" parent="."]
 position = Vector2( -307, -392 )
@@ -178,5 +202,9 @@ autowrap = true
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+bus = "Sfx"
 
 [connection signal="timeout" from="Thought/Timer" to="." method="_on_Timer_timeout"]
