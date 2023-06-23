@@ -246,7 +246,7 @@ genericFurnitureScene = ExtResource( 6 )
 position = Vector2( 126, 427 )
 texture = ExtResource( 9 )
 tasks = [ "Asistir a reunion laboral" ]
-probability = 30
+probability = 50
 sound = ExtResource( 20 )
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
@@ -269,7 +269,7 @@ position = Vector2( 758, 423 )
 id = 2
 texture = ExtResource( 10 )
 tasks = [ "Preparar almuerzo" ]
-probability = 40
+probability = 60
 sound = ExtResource( 24 )
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Kitchen"]
@@ -292,6 +292,7 @@ position = Vector2( 271, 461 )
 scale = Vector2( 0.2, 0.2 )
 id = 3
 texture = ExtResource( 11 )
+probability = 30
 sound = ExtResource( 25 )
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Plant"]
@@ -306,7 +307,7 @@ scale = Vector2( 0.25, 0.25 )
 id = 4
 texture = ExtResource( 12 )
 tasks = [ null ]
-probability = 60
+probability = 70
 sound = ExtResource( 22 )
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/WashingMachine"]
@@ -321,7 +322,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 17
+frame = 7
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
