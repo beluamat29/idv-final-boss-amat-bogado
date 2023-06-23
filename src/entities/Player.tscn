@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entities/playeridle.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/textures/entities/drinking.png" type="Texture" id=17]
 [ext_resource path="res://assets/sounds/slurping.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=19]
+[ext_resource path="res://assets/sounds/breathing.mp3" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.5, 209 )
@@ -161,6 +162,11 @@ texture = ExtResource( 19 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/squash = SubResource( 2 )
+
+[node name="Breath" type="AudioStreamPlayer" parent="AnimationPlayer"]
+stream = ExtResource( 20 )
+volume_db = -15.28
+bus = "Sfx"
 
 [node name="Thought" type="Sprite" parent="."]
 position = Vector2( -307, -392 )

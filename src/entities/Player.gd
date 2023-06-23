@@ -127,6 +127,7 @@ func drinkCoffee():
 	finishCoffee()
 		
 func finishCoffee():
+	emit_signal("coffee_finished")
 	canDrinkCoffee = false
 	coffeeWasClicked = false
 
