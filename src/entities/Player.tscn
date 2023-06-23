@@ -179,7 +179,7 @@ anims/squash = SubResource( 2 )
 
 [node name="Breath" type="AudioStreamPlayer" parent="AnimationPlayer"]
 stream = ExtResource( 20 )
-volume_db = -15.28
+volume_db = -30.0
 bus = "Sfx"
 
 [node name="Thought" type="Sprite" parent="."]
