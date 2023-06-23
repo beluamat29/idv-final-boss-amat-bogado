@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/entities/image.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/Child.gd" type="Script" id=2]
-[ext_resource path="res://src/entities/ChildTimer.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/crying.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -73,9 +72,8 @@ color = Color( 1, 0.560784, 0, 1 )
 polygon = PoolVector2Array( 43, -126, 56, -120, 36, -91 )
 
 [node name="ChildRandomTimer" type="Timer" parent="."]
-wait_time = 0.225
+wait_time = 5.0
 autostart = true
-script = ExtResource( 3 )
 
 [node name="StrollerAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
