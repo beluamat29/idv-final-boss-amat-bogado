@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/textures/entities/drinking.png" type="Texture" id=17]
 [ext_resource path="res://assets/sounds/slurping.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/textures/entities/eyes1.png" type="Texture" id=19]
-[ext_resource path="res://assets/sounds/breathing.mp3" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/breathing.wav" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.5, 209 )
@@ -124,6 +124,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.644928, 0.743671 ), Vector2( 0.78, 0.77 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AnimationPlayer/Breath")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 20 )
+} ],
+"times": PoolRealArray( 0.83 )
 }
 
 [sub_resource type="DynamicFont" id=5]
