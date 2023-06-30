@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1floating-onwards-68539.mp3-69333e912fe98bc154e53b4a5b0b8106.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/1floating-onwards-68539.mp3"
+dest_files=[ "res://.import/1floating-onwards-68539.mp3-69333e912fe98bc154e53b4a5b0b8106.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
