@@ -37,4 +37,5 @@ bus = "Sfx"
 [connection signal="body_entered" from="." to="." method="_on_GenericFurniture_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_GenericFurniture_body_exited"]
 [connection signal="input_event" from="." to="." method="_on_GenericFurniture_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_GenericFurniture_mouse_entered"]
 [connection signal="timeout" from="FurnitureTimer" to="." method="_on_FurnitureTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -79,6 +79,8 @@
 [ext_resource path="res://assets/sounds/clock.wav" type="AudioStream" id=77]
 [ext_resource path="res://assets/sounds/morning.wav" type="AudioStream" id=78]
 [ext_resource path="res://assets/sounds/night.wav" type="AudioStream" id=79]
+[ext_resource path="res://assets/textures/entities/hand.png" type="Texture" id=80]
+[ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=81]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -161,6 +163,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 217.0, 338.0 ]
 }
+cursor_point = ExtResource( 81 )
+cursor_inactive = ExtResource( 80 )
 
 [node name="Background2" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -260,7 +264,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -284,7 +287,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -322,7 +324,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 14
+frame = 1
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -465,37 +467,53 @@ script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
+[connection signal="mouse_entered" from="Environment/Floor2" to="." method="_on_Floor_mouse_entered"]
+[connection signal="mouse_exited" from="Environment/Floor2" to="." method="_on_mouse_exited"]
 [connection signal="body_entered" from="Environment/Entities/Fridge" to="." method="_on_Fridge_body_entered"]
 [connection signal="body_exited" from="Environment/Entities/Fridge" to="." method="_on_Fridge_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Fridge" to="." method="_on_Fridge_input_event"]
+[connection signal="mouse_entered" from="Environment/Entities/Fridge" to="." method="_on_Fridge_mouse_entered"]
+[connection signal="mouse_exited" from="Environment/Entities/Fridge" to="." method="_on_mouse_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="mouse_exited" from="Environment/Entities/Furniture/Desk" to="." method="_on_mouse_exited"]
+[connection signal="selected" from="Environment/Entities/Furniture/Desk" to="." method="_on_furniture_selected"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="mouse_exited" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_mouse_exited"]
+[connection signal="selected" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_furniture_selected"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Kitchen" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="mouse_exited" from="Environment/Entities/Furniture/Plant" to="." method="_on_mouse_exited"]
+[connection signal="selected" from="Environment/Entities/Furniture/Plant" to="." method="_on_furniture_selected"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/Plant" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="mouse_exited" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_mouse_exited"]
+[connection signal="selected" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_furniture_selected"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="." method="_on_GenericFurniture_task_finished"]
 [connection signal="task_finished" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_finished"]
 [connection signal="task_in_progress" from="Environment/Entities/Furniture/WashingMachine" to="Environment/Entities/Child" method="_on_task_in_progress"]
 [connection signal="crying" from="Environment/Entities/Child" to="." method="_on_Child_crying"]
+[connection signal="mouse_exited" from="Environment/Entities/Child" to="." method="_on_mouse_exited"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="." method="_on_Child_player_baby_toggle"]
 [connection signal="player_baby_toggle" from="Environment/Entities/Child" to="Environment/Entities/Player" method="_on_Child_player_baby_toggle"]
+[connection signal="selected" from="Environment/Entities/Child" to="." method="_on_furniture_selected"]
 [connection signal="set_player_target" from="Environment/Entities/Child" to="." method="_on_Child_set_player_target"]
 [connection signal="coffee_finished" from="Environment/Entities/Player" to="Environment/Entities/CoffeeTable" method="_on_Player_coffee_finished"]
 [connection signal="coffee_finished" from="Environment/Entities/Player" to="StressBar" method="_on_Player_coffee_finished"]
 [connection signal="body_entered" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_body_entered"]
 [connection signal="input_event" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_input_event"]
+[connection signal="mouse_entered" from="Environment/Entities/CoffeeTable/Coffee" to="." method="_on_furniture_selected"]
+[connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="." method="_on_mouse_exited"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]

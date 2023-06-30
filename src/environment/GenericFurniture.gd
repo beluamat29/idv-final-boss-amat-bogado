@@ -13,7 +13,7 @@ var player: KinematicBody2D
 export var tasks: Array = []
 export var probability: int = 10
 export var sound: AudioStream
-
+signal selected()
 signal task_finished(id)
 signal task_in_progress(probability)
 
@@ -76,3 +76,8 @@ func _on_FurnitureTimer_timeout():
 func toggleAnimation(value: bool):
 	if(animation != null):
 		animation.visible = value
+
+
+func _on_GenericFurniture_mouse_entered():
+	if !tasks.empty():
+		emit_signal("selected")

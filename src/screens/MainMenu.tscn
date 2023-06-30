@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/black.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://src/screens/BrainShadow.gd" type="Script" id=8]
 [ext_resource path="res://assets/textures/buttonMenu.png" type="Texture" id=9]
 [ext_resource path="res://assets/sounds/1floating-onwards-68539.mp3" type="AudioStream" id=10]
+[ext_resource path="res://assets/textures/entities/hand.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=2]
 size = 125
@@ -59,6 +61,8 @@ __meta__ = {
 "_edit_vertical_guides_": [ 500.0 ]
 }
 level_manager = ExtResource( 4 )
+cursor_inactive = ExtResource( 11 )
+cursor_click = ExtResource( 12 )
 
 [node name="Container" type="Control" parent="."]
 anchor_right = 1.0
@@ -152,5 +156,9 @@ stream = ExtResource( 10 )
 autoplay = true
 bus = "Background"
 
+[connection signal="mouse_entered" from="Container/Buttons/StartButton" to="." method="_on_selected"]
+[connection signal="mouse_exited" from="Container/Buttons/StartButton" to="." method="_on_unselected"]
 [connection signal="pressed" from="Container/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="mouse_entered" from="Container/Buttons/ExitButton" to="." method="_on_selected"]
+[connection signal="mouse_exited" from="Container/Buttons/ExitButton" to="." method="_on_unselected"]
 [connection signal="pressed" from="Container/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]

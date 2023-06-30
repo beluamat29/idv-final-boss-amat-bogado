@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/nefarious-resynchronization-73137.mp3-889c5d1829658d2087c7a5811cff60ed.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/nefarious-resynchronization-73137.mp3"
+dest_files=[ "res://.import/nefarious-resynchronization-73137.mp3-889c5d1829658d2087c7a5811cff60ed.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
