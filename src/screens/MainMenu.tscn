@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/black.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://src/screens/Brain.gd" type="Script" id=6]
 [ext_resource path="res://assets/textures/environment/shade2.png" type="Texture" id=7]
 [ext_resource path="res://src/screens/BrainShadow.gd" type="Script" id=8]
+[ext_resource path="res://assets/textures/buttonMenu.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/1floating-onwards-68539.mp3" type="AudioStream" id=10]
+[ext_resource path="res://assets/textures/entities/hand.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=2]
 size = 125
@@ -15,9 +19,6 @@ outline_color = Color( 0.172549, 0.0705882, 0.0705882, 1 )
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=1]
@@ -60,6 +61,8 @@ __meta__ = {
 "_edit_vertical_guides_": [ 500.0 ]
 }
 level_manager = ExtResource( 4 )
+cursor_inactive = ExtResource( 11 )
+cursor_click = ExtResource( 12 )
 
 [node name="Container" type="Control" parent="."]
 anchor_right = 1.0
@@ -85,37 +88,50 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -156.0
-margin_top = 202.0
-margin_right = 134.0
-margin_bottom = 251.0
-rect_min_size = Vector2( 86, 0 )
+margin_left = -136.0
+margin_top = 175.0
+margin_right = 115.0
+margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 alignment = 1
 
-[node name="StartButton" type="Button" parent="Container/Buttons"]
-margin_left = 118.0
-margin_top = 2.0
-margin_right = 171.0
-margin_bottom = 22.0
+[node name="StartButton" type="TextureButton" parent="Container/Buttons"]
+margin_right = 251.0
+margin_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Container/Buttons/StartButton"]
+margin_left = 11.0
+margin_top = 12.0
+margin_right = 241.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.92549, 0.85098, 0.25098, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "Start"
-icon_align = 1
+align = 1
+valign = 1
 
-[node name="ExitButton" type="Button" parent="Container/Buttons"]
-margin_left = 125.0
-margin_top = 26.0
-margin_right = 165.0
-margin_bottom = 46.0
+[node name="ExitButton" type="TextureButton" parent="Container/Buttons"]
+margin_top = 55.0
+margin_right = 251.0
+margin_bottom = 106.0
 size_flags_horizontal = 4
+texture_normal = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Container/Buttons/ExitButton"]
+margin_left = 11.0
+margin_top = 11.0
+margin_right = 240.0
+margin_bottom = 41.0
 custom_colors/font_color = Color( 0.92549, 0.85098, 0.25098, 1 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Exit"
+align = 1
+valign = 1
 
 [node name="Brain" type="Sprite" parent="Container"]
 position = Vector2( 500, 320 )
@@ -135,5 +151,14 @@ script = ExtResource( 8 )
 [node name="ShadowAnimation" type="AnimationPlayer" parent="Container/BrainShadow"]
 anims/shadow = SubResource( 4 )
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+bus = "Background"
+
+[connection signal="mouse_entered" from="Container/Buttons/StartButton" to="." method="_on_selected"]
+[connection signal="mouse_exited" from="Container/Buttons/StartButton" to="." method="_on_unselected"]
 [connection signal="pressed" from="Container/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="mouse_entered" from="Container/Buttons/ExitButton" to="." method="_on_selected"]
+[connection signal="mouse_exited" from="Container/Buttons/ExitButton" to="." method="_on_unselected"]
 [connection signal="pressed" from="Container/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]

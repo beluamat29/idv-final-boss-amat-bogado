@@ -9,6 +9,13 @@ onready var coffeeTable = $Environment/Entities/CoffeeTable
 var SHOW_COFFE_VALUE = 40
 signal victory
 signal game_over
+var cursor_images: Array = []
+export var cursor_point: Texture
+export var cursor_inactive: Texture
+
+func _physics_process(delta):
+	if !cursor_images.empty():
+		Input.set_custom_mouse_cursor(cursor_images.pop_back(), Input.CURSOR_ARROW, Vector2(25,25))
 
 func objectWasPressed(objectId):
 	tasksList.objectWasPressed(objectId)
@@ -57,3 +64,20 @@ func _on_Fridge_body_entered(body):
 func _on_Fridge_body_exited(body):
 	tasks.hide()
 	player.busy = false
+
+
+func _on_Fridge_mouse_entered():
+	_set_point_mouse_cursor()
+
+func _on_mouse_exited():
+	cursor_images.append(cursor_inactive)
+
+func _on_Floor_mouse_entered():
+	_set_point_mouse_cursor()
+
+func _on_furniture_selected():
+	_set_point_mouse_cursor()
+	
+func _set_point_mouse_cursor():
+	cursor_images.append(cursor_point)
+

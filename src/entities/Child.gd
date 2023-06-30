@@ -11,6 +11,7 @@ var crying_probability: int = 0
 signal set_player_target()
 signal player_baby_toggle(value)
 signal crying()
+signal selected()
 
 func _physics_process(delta):
 	if task_activated && body_entered && crying:
@@ -56,3 +57,22 @@ func _on_task_finished(id):
 func _on_furniture_body_exited(body):
 	if !body.busy:
 		crying_probability = 0
+
+
+func _on_Child_body_exited(body):
+	body_entered = false
+
+
+func _on_Child_body_entered(body):
+	body_entered = true
+
+
+func _on_Child_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed) && crying:
+		task_activated = true
+		emit_signal("set_player_target")
+
+
+func _on_Child_mouse_entered():
+	if crying:
+		emit_signal("selected")
