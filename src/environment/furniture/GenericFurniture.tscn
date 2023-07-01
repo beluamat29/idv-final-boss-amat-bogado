@@ -13,6 +13,7 @@ scale = Vector2( 0.408203, 0.398438 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+use_parent_material = true
 
 [node name="ProgressBar" type="TextureProgress" parent="."]
 visible = false
@@ -38,4 +39,5 @@ bus = "Sfx"
 [connection signal="body_exited" from="." to="." method="_on_GenericFurniture_body_exited"]
 [connection signal="input_event" from="." to="." method="_on_GenericFurniture_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_GenericFurniture_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_GenericFurniture_mouse_exited"]
 [connection signal="timeout" from="FurnitureTimer" to="." method="_on_FurnitureTimer_timeout"]
