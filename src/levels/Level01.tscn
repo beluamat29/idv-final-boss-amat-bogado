@@ -100,7 +100,7 @@ colors = PoolColorArray( 1, 0.929989, 0.739958, 1, 1, 0.917647, 0.694118, 1 )
 gradient = SubResource( 13 )
 
 [sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 8, 12 )
+extents = Vector2( 8, 42 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 45.75 )
@@ -341,6 +341,7 @@ offset = Vector2( -1.65632, 44.7514 )
 energy = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Switch"]
+position = Vector2( 0, 30 )
 shape = SubResource( 26 )
 
 [node name="Sprite" type="Sprite" parent="Environment/Switch"]
@@ -442,7 +443,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -467,7 +468,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -508,7 +509,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 17
+frame = 22
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -658,6 +659,9 @@ script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
 [connection signal="_on_selected" from="Environment/Switch" to="." method="_on_furniture_selected"]
+[connection signal="body_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_entered"]
+[connection signal="body_exited" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_exited"]
+[connection signal="input_event" from="Environment/Switch" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="input_event" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_input_event"]
 [connection signal="mouse_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_mouse_entered"]
 [connection signal="mouse_exited" from="Environment/Switch" to="." method="_on_mouse_exited"]
@@ -715,8 +719,8 @@ clockNodePath = NodePath("../Time")
 [connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/CoffeeTable/Coffee" method="_on_Coffee_mouse_exited"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
 [connection signal="end_sunset" from="Time" to="Environment/Switch" method="_on_Time_end_sunset"]
-[connection signal="end_sunset" from="Time" to="Environment/Window" method="_on_Time_end_sunset"]
 [connection signal="end_sunset" from="Time" to="Environment/Window2" method="_on_Time_end_sunset"]
+[connection signal="end_sunset" from="Time" to="Environment/Window" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
