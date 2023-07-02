@@ -5,7 +5,6 @@ const seconds_per_hour:int = 30
 
 export(float, 0, 1) var brightness_night = 0.3
 export(float, 0, 1) var brightness_day = 1.0
-export(Color) var color_dawn = Color("fff1d0")
 export(Color) var color_day = Color("ffffff")
 export(Color) var color_dusk = Color("854646")
 export(Color) var color_night = Color("27264c")

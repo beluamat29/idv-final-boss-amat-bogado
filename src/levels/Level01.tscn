@@ -409,7 +409,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -434,7 +433,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -475,7 +473,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 24
+frame = 15
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -573,6 +571,7 @@ scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 23 )
 
 [node name="Countdown" type="Timer" parent="Time"]
+wait_time = 0.2
 autostart = true
 
 [node name="PivotMinutes" type="Position2D" parent="Time"]
@@ -615,9 +614,11 @@ texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 3 )
 nine_patch_stretch = true
 
+[node name="Timer" type="Timer" parent="StressBar"]
+autostart = true
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1, 1 )
-color = Color( 1, 0.945098, 0.815686, 1 )
 script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
@@ -681,7 +682,7 @@ clockNodePath = NodePath("../Time")
 [connection signal="end_sunset" from="Time" to="Environment/Switch" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
-[connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
+[connection signal="timeout" from="StressBar/Timer" to="StressBar" method="_on_Timer_timeout"]
