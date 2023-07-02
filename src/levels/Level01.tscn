@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -77,7 +77,7 @@
 [ext_resource path="res://src/levels/CoffeeTable.gd" type="Script" id=75]
 [ext_resource path="res://src/levels/Sparkles.gd" type="Script" id=76]
 [ext_resource path="res://assets/sounds/clock.wav" type="AudioStream" id=77]
-[ext_resource path="res://assets/sounds/morning.wav" type="AudioStream" id=78]
+[ext_resource path="res://src/levels/Background.gd" type="Script" id=78]
 [ext_resource path="res://assets/sounds/night.wav" type="AudioStream" id=79]
 [ext_resource path="res://assets/textures/entities/hand.png" type="Texture" id=80]
 [ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=81]
@@ -91,6 +91,7 @@
 [ext_resource path="res://assets/textures/animations/window4.png" type="Texture" id=89]
 [ext_resource path="res://assets/textures/animations/window3.png" type="Texture" id=90]
 [ext_resource path="res://assets/textures/animations/window1.png" type="Texture" id=91]
+[ext_resource path="res://src/levels/Clock.gd" type="Script" id=92]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -304,6 +305,22 @@ tracks/0/keys = {
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 21 )
 
+[sub_resource type="Animation" id=28]
+resource_name = "highlight"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.35, 0.35 ), Vector2( 0.37, 0.37 ), Vector2( 0.35, 0.35 ) ]
+}
+
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -509,7 +526,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 22
+frame = 14
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -597,14 +614,19 @@ script = ExtResource( 7 )
 night_music = ExtResource( 79 )
 
 [node name="Background" type="AudioStreamPlayer" parent="Time"]
-stream = ExtResource( 78 )
+stream = ExtResource( 77 )
 volume_db = -30.0
 autoplay = true
+script = ExtResource( 78 )
 
-[node name="Sprite" type="Sprite" parent="Time"]
+[node name="Clock" type="Sprite" parent="Time"]
 position = Vector2( 101.4, 87.4 )
-scale = Vector2( 0.35, 0.35 )
+scale = Vector2( 0.351909, 0.351909 )
 texture = ExtResource( 23 )
+script = ExtResource( 92 )
+
+[node name="ClockAnimation" type="AnimationPlayer" parent="Time/Clock"]
+anims/highlight = SubResource( 28 )
 
 [node name="Countdown" type="Timer" parent="Time"]
 wait_time = 0.2
@@ -722,6 +744,7 @@ clockNodePath = NodePath("../Time")
 [connection signal="end_sunset" from="Time" to="Environment/Window2" method="_on_Time_end_sunset"]
 [connection signal="end_sunset" from="Time" to="Environment/Window" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
+[connection signal="time_about_to_finish" from="Time" to="Time/Clock" method="_on_Time_time_about_to_finish"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]

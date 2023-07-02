@@ -1,6 +1,7 @@
 extends Node
 
 var tiempoTotal = 300 #segundos
+var TIME_ABOUT_TO_FINISH_HOUR = 21
 onready var pivotHours:Position2D = $PivotHours
 onready var pivotMinutes:Position2D = $PivotMinutes
 onready var music: AudioStreamPlayer = $Background
@@ -8,11 +9,13 @@ export var night_music: AudioStream
 
 signal game_over
 signal end_sunset
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+signal time_about_to_finish
 	
+func checkIfTimeAboutToFinish():
+	if _hour() == TIME_ABOUT_TO_FINISH_HOUR:
+		emit_signal("time_about_to_finish")
+		music.timeAboutToFinish()
+		
 func _on_Countdown_timeout():
 	if(tiempoTotal < 660):
 		tiempoTotal += 1
@@ -24,6 +27,7 @@ func _on_Countdown_timeout():
 		get_tree().paused = true
 		emit_signal("game_over")
 		
+	checkIfTimeAboutToFinish()	
 	if _hour() == 18:
 		music.stop()
 		music.stream = night_music
