@@ -15,10 +15,10 @@ func _ready():
 	
 func _on_Countdown_timeout():
 	if(tiempoTotal < 660):
-		tiempoTotal += 5
+		tiempoTotal += 1
 		if(_minutes() == 0):
 			pivotHours.rotation_degrees += 30
-		pivotMinutes.rotation_degrees += 60
+		pivotMinutes.rotation_degrees += 12
 	
 	else:
 		get_tree().paused = true

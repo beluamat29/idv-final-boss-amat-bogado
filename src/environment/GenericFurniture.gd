@@ -81,3 +81,7 @@ func toggleAnimation(value: bool):
 func _on_GenericFurniture_mouse_entered():
 	if !tasks.empty():
 		emit_signal("selected")
+		material.set_shader_param("width", 8)
+
+func _on_GenericFurniture_mouse_exited():
+	material.set_shader_param("width", 0)

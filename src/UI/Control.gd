@@ -14,10 +14,9 @@ func _change_stress_bar(value) -> void:
 	else:
 		emit_signal("game_over")
 
-
-func _on_Countdown_timeout():
-	_change_stress_bar(increased_stress)
-
-
 func _on_Player_coffee_finished():
 	_change_stress_bar(-10)
+
+
+func _on_Timer_timeout():
+	_change_stress_bar(increased_stress)

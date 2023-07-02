@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -69,8 +69,8 @@
 [ext_resource path="res://assets/textures/entities/handsminutes.png" type="Texture" id=67]
 [ext_resource path="res://assets/textures/environment/furniture/window.png" type="Texture" id=68]
 [ext_resource path="res://src/levels/CanvasModulate.gd" type="Script" id=69]
-[ext_resource path="res://assets/textures/environment/light.png" type="Texture" id=70]
-[ext_resource path="res://src/levels/Light2D4.gd" type="Script" id=71]
+[ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=70]
+[ext_resource path="res://src/levels/Window.gd" type="Script" id=71]
 [ext_resource path="res://assets/textures/environment/furniture/coffeetable.png" type="Texture" id=72]
 [ext_resource path="res://assets/textures/environment/coffee.png" type="Texture" id=73]
 [ext_resource path="res://assets/textures/environment/sparkles.png" type="Texture" id=74]
@@ -81,6 +81,16 @@
 [ext_resource path="res://assets/sounds/night.wav" type="AudioStream" id=79]
 [ext_resource path="res://assets/textures/entities/hand.png" type="Texture" id=80]
 [ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=81]
+[ext_resource path="res://src/levels/Fridge.gd" type="Script" id=82]
+[ext_resource path="res://src/levels/Coffee.gd" type="Script" id=83]
+[ext_resource path="res://assets/textures/environment/switch.png" type="Texture" id=84]
+[ext_resource path="res://src/levels/Area2D.gd" type="Script" id=85]
+[ext_resource path="res://assets/textures/animations/window2.png" type="Texture" id=86]
+[ext_resource path="res://assets/textures/animations/window5.png" type="Texture" id=87]
+[ext_resource path="res://assets/textures/animations/window6.png" type="Texture" id=88]
+[ext_resource path="res://assets/textures/animations/window4.png" type="Texture" id=89]
+[ext_resource path="res://assets/textures/animations/window3.png" type="Texture" id=90]
+[ext_resource path="res://assets/textures/animations/window1.png" type="Texture" id=91]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -89,11 +99,107 @@ colors = PoolColorArray( 1, 0.929989, 0.739958, 1, 1, 0.917647, 0.694118, 1 )
 [sub_resource type="GradientTexture" id=12]
 gradient = SubResource( 13 )
 
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 8, 42 )
+
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 45.75 )
 
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ ExtResource( 91 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 91 ), ExtResource( 86 ), ExtResource( 90 ), ExtResource( 89 ), ExtResource( 87 ), ExtResource( 88 ) ],
+"loop": false,
+"name": "sunset",
+"speed": 5.0
+} ]
+
+[sub_resource type="Shader" id=18]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color = vec4(1.0);
+uniform float width : hint_range(0, 10) = 1.0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+uniform bool inside = false;
+uniform bool add_margins = true; // only useful when inside is false
+
+void vertex() {
+	if (add_margins) {
+		VERTEX += (UV * 2.0 - 1.0) * width;
+	}
+}
+
+bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
+	for (float i = -ceil(width); i <= ceil(width); i++) {
+		float x = abs(i) > width ? width * sign(i) : i;
+		float offset;
+		
+		if (pattern == 0) {
+			offset = width - abs(x);
+		} else if (pattern == 1) {
+			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+		} else if (pattern == 2) {
+			offset = width;
+		}
+		
+		for (float j = -ceil(offset); j <= ceil(offset); j++) {
+			float y = abs(j) > offset ? offset * sign(j) : j;
+			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+			
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a == 0.0) == inside) {
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	if (add_margins) {
+		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
+		
+		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
+		
+		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
+			COLOR.a = 0.0;
+		} else {
+			COLOR = texture(TEXTURE, uv);
+		}
+	} else {
+		COLOR = texture(TEXTURE, uv);
+	}
+	
+	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 8.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
+
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 173.317, 90.5192 )
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -103,6 +209,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ ExtResource( 30 ), ExtResource( 31 ), ExtResource( 33 ), ExtResource( 32 ) ],
@@ -111,6 +225,22 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="ShaderMaterial" id=21]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ ExtResource( 40 ), ExtResource( 41 ), ExtResource( 39 ), ExtResource( 39 ), ExtResource( 45 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 51 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 42 ), ExtResource( 62 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 56 ), ExtResource( 64 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 61 ), ExtResource( 60 ), ExtResource( 52 ), ExtResource( 63 ) ],
@@ -118,6 +248,22 @@ animations = [ {
 "name": "washing",
 "speed": 100.0
 } ]
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = SubResource( 18 )
+shader_param/color = Color( 0.478431, 0.760784, 0.439216, 1 )
+shader_param/width = 0.0
+shader_param/pattern = 2
+shader_param/inside = false
+shader_param/add_margins = true
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 18, 16.75 )
@@ -177,14 +323,30 @@ expand = true
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="Light2D4" type="Light2D" parent="Environment"]
+[node name="Switch" type="Area2D" parent="Environment"]
+position = Vector2( 447, 289 )
+script = ExtResource( 85 )
+
+[node name="Light2D" type="Light2D" parent="Environment/Switch"]
 visible = false
-position = Vector2( 530.664, 225.813 )
+scale = Vector2( 0.0703125, 0.0507813 )
+texture = ExtResource( 84 )
+
+[node name="Light2D4" type="Light2D" parent="Environment/Switch"]
+visible = false
+position = Vector2( 83.664, -63.187 )
 scale = Vector2( 1.91043, 1.36841 )
 texture = ExtResource( 70 )
 offset = Vector2( -1.65632, 44.7514 )
 energy = 0.8
-script = ExtResource( 71 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Switch"]
+position = Vector2( 0, 30 )
+shape = SubResource( 26 )
+
+[node name="Sprite" type="Sprite" parent="Environment/Switch"]
+scale = Vector2( 0.0625, 0.0488281 )
+texture = ExtResource( 84 )
 
 [node name="Floor2" type="StaticBody2D" parent="Environment"]
 position = Vector2( 510, 581 )
@@ -205,14 +367,26 @@ texture = ExtResource( 18 )
 position = Vector2( 1024, 301 )
 
 [node name="Window2" type="Sprite" parent="Environment"]
-position = Vector2( 565.809, 278.117 )
-scale = Vector2( 0.194568, 0.237824 )
-texture = ExtResource( 68 )
-
-[node name="Window" type="Sprite" parent="Environment"]
 position = Vector2( 321, 278 )
 scale = Vector2( 0.192383, 0.234375 )
 texture = ExtResource( 68 )
+script = ExtResource( 71 )
+
+[node name="AnimationPlayer" type="AnimatedSprite" parent="Environment/Window2"]
+position = Vector2( -9.15527e-05, -7.62939e-06 )
+scale = Vector2( 1.07907, 1.09073 )
+frames = SubResource( 27 )
+
+[node name="Window" type="Sprite" parent="Environment"]
+position = Vector2( 566, 279 )
+scale = Vector2( 0.192383, 0.234375 )
+texture = ExtResource( 68 )
+script = ExtResource( 71 )
+
+[node name="AnimationPlayer" type="AnimatedSprite" parent="Environment/Window"]
+position = Vector2( -9.15527e-05, -7.62939e-06 )
+scale = Vector2( 1.07907, 1.09073 )
+frames = SubResource( 27 )
 
 [node name="Shelf" type="Sprite" parent="Environment"]
 position = Vector2( 122, 279 )
@@ -227,10 +401,13 @@ texture = ExtResource( 65 )
 [node name="Entities" type="Node2D" parent="Environment"]
 
 [node name="Fridge" type="Area2D" parent="Environment/Entities"]
+material = SubResource( 23 )
 position = Vector2( 936, 423 )
 scale = Vector2( 0.314453, 0.353516 )
+script = ExtResource( 82 )
 
 [node name="FridgeBody" type="Sprite" parent="Environment/Entities/Fridge"]
+use_parent_material = true
 texture = ExtResource( 8 )
 
 [node name="PostIt" type="Sprite" parent="Environment/Entities/Fridge/FridgeBody"]
@@ -247,7 +424,9 @@ script = ExtResource( 38 )
 genericFurnitureScene = ExtResource( 6 )
 
 [node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
+material = SubResource( 19 )
 position = Vector2( 126, 427 )
+id = null
 texture = ExtResource( 9 )
 tasks = [ "Asistir a reunion laboral" ]
 probability = 50
@@ -264,10 +443,12 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
 unique_name_in_owner = true
+material = SubResource( 20 )
 position = Vector2( 758, 423 )
 id = 2
 texture = ExtResource( 10 )
@@ -287,13 +468,16 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
+material = SubResource( 21 )
 position = Vector2( 271, 461 )
 scale = Vector2( 0.2, 0.2 )
 id = 3
 texture = ExtResource( 11 )
+tasks = null
 probability = 30
 sound = ExtResource( 25 )
 
@@ -304,6 +488,7 @@ scale = Vector2( 0.304688, 0.265625 )
 texture = ExtResource( 28 )
 
 [node name="WashingMachine" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
+material = SubResource( 22 )
 position = Vector2( 583, 449 )
 scale = Vector2( 0.25, 0.25 )
 id = 4
@@ -324,10 +509,11 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 1
+frame = 22
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
+material = SubResource( 24 )
 position = Vector2( 370, 451 )
 
 [node name="Player" parent="Environment/Entities" instance=ExtResource( 4 )]
@@ -345,8 +531,11 @@ texture = ExtResource( 72 )
 
 [node name="Coffee" type="Area2D" parent="Environment/Entities/CoffeeTable"]
 visible = false
+material = SubResource( 25 )
+script = ExtResource( 83 )
 
 [node name="CoffeeImage" type="Sprite" parent="Environment/Entities/CoffeeTable/Coffee"]
+use_parent_material = true
 position = Vector2( 3.875, -61.25 )
 scale = Vector2( 0.0981445, 0.0927735 )
 texture = ExtResource( 73 )
@@ -418,6 +607,7 @@ scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 23 )
 
 [node name="Countdown" type="Timer" parent="Time"]
+wait_time = 0.2
 autostart = true
 
 [node name="PivotMinutes" type="Position2D" parent="Time"]
@@ -460,12 +650,21 @@ texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 3 )
 nine_patch_stretch = true
 
+[node name="Timer" type="Timer" parent="StressBar"]
+autostart = true
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1, 1 )
-color = Color( 1, 0.945098, 0.815686, 1 )
 script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
+[connection signal="_on_selected" from="Environment/Switch" to="." method="_on_furniture_selected"]
+[connection signal="body_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_entered"]
+[connection signal="body_exited" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_exited"]
+[connection signal="input_event" from="Environment/Switch" to="." method="_on_GenericFurniture_input_event"]
+[connection signal="input_event" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_input_event"]
+[connection signal="mouse_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_mouse_entered"]
+[connection signal="mouse_exited" from="Environment/Switch" to="." method="_on_mouse_exited"]
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
 [connection signal="mouse_entered" from="Environment/Floor2" to="." method="_on_Floor_mouse_entered"]
 [connection signal="mouse_exited" from="Environment/Floor2" to="." method="_on_mouse_exited"]
@@ -473,7 +672,9 @@ clockNodePath = NodePath("../Time")
 [connection signal="body_exited" from="Environment/Entities/Fridge" to="." method="_on_Fridge_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Fridge" to="." method="_on_Fridge_input_event"]
 [connection signal="mouse_entered" from="Environment/Entities/Fridge" to="." method="_on_Fridge_mouse_entered"]
+[connection signal="mouse_entered" from="Environment/Entities/Fridge" to="Environment/Entities/Fridge" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Environment/Entities/Fridge" to="." method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="Environment/Entities/Fridge" to="Environment/Entities/Fridge" method="_on_mouse_exited"]
 [connection signal="body_exited" from="Environment/Entities/Furniture/Desk" to="Environment/Entities/Child" method="_on_furniture_body_exited"]
 [connection signal="input_event" from="Environment/Entities/Furniture/Desk" to="." method="_on_GenericFurniture_input_event"]
 [connection signal="mouse_exited" from="Environment/Entities/Furniture/Desk" to="." method="_on_mouse_exited"]
@@ -513,12 +714,16 @@ clockNodePath = NodePath("../Time")
 [connection signal="body_entered" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_body_entered"]
 [connection signal="input_event" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/Player" method="_on_Coffee_input_event"]
 [connection signal="mouse_entered" from="Environment/Entities/CoffeeTable/Coffee" to="." method="_on_furniture_selected"]
+[connection signal="mouse_entered" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/CoffeeTable/Coffee" method="_on_Coffee_mouse_entered"]
 [connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="." method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/CoffeeTable/Coffee" method="_on_Coffee_mouse_exited"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
-[connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
+[connection signal="end_sunset" from="Time" to="Environment/Switch" method="_on_Time_end_sunset"]
+[connection signal="end_sunset" from="Time" to="Environment/Window2" method="_on_Time_end_sunset"]
+[connection signal="end_sunset" from="Time" to="Environment/Window" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
-[connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
+[connection signal="timeout" from="StressBar/Timer" to="StressBar" method="_on_Timer_timeout"]
