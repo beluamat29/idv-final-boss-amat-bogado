@@ -76,3 +76,8 @@ func _on_Child_input_event(viewport, event, shape_idx):
 func _on_Child_mouse_entered():
 	if crying:
 		emit_signal("selected")
+		material.set_shader_param("width", 8)
+
+
+func _on_Child_mouse_exited():
+	material.set_shader_param("width", 0)

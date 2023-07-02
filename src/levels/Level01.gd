@@ -80,4 +80,3 @@ func _on_furniture_selected():
 	
 func _set_point_mouse_cursor():
 	cursor_images.append(cursor_point)
-
