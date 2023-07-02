@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -69,8 +69,7 @@
 [ext_resource path="res://assets/textures/entities/handsminutes.png" type="Texture" id=67]
 [ext_resource path="res://assets/textures/environment/furniture/window.png" type="Texture" id=68]
 [ext_resource path="res://src/levels/CanvasModulate.gd" type="Script" id=69]
-[ext_resource path="res://assets/textures/environment/light.png" type="Texture" id=70]
-[ext_resource path="res://src/levels/Light2D4.gd" type="Script" id=71]
+[ext_resource path="res://assets/textures/environment/background.png" type="Texture" id=70]
 [ext_resource path="res://assets/textures/environment/furniture/coffeetable.png" type="Texture" id=72]
 [ext_resource path="res://assets/textures/environment/coffee.png" type="Texture" id=73]
 [ext_resource path="res://assets/textures/environment/sparkles.png" type="Texture" id=74]
@@ -83,6 +82,8 @@
 [ext_resource path="res://assets/textures/entities/tap.png" type="Texture" id=81]
 [ext_resource path="res://src/levels/Fridge.gd" type="Script" id=82]
 [ext_resource path="res://src/levels/Coffee.gd" type="Script" id=83]
+[ext_resource path="res://assets/textures/environment/switch.png" type="Texture" id=84]
+[ext_resource path="res://src/levels/Area2D.gd" type="Script" id=85]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -90,6 +91,9 @@ colors = PoolColorArray( 1, 0.929989, 0.739958, 1, 1, 0.917647, 0.694118, 1 )
 
 [sub_resource type="GradientTexture" id=12]
 gradient = SubResource( 13 )
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 8, 12 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 511, 45.75 )
@@ -299,14 +303,28 @@ expand = true
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="Light2D4" type="Light2D" parent="Environment"]
+[node name="Switch" type="Area2D" parent="Environment"]
+position = Vector2( 447, 289 )
+script = ExtResource( 85 )
+
+[node name="Light2D" type="Light2D" parent="Environment/Switch"]
+scale = Vector2( 0.0703125, 0.0507813 )
+texture = ExtResource( 84 )
+
+[node name="Light2D4" type="Light2D" parent="Environment/Switch"]
 visible = false
-position = Vector2( 530.664, 225.813 )
+position = Vector2( 83.664, -63.187 )
 scale = Vector2( 1.91043, 1.36841 )
 texture = ExtResource( 70 )
 offset = Vector2( -1.65632, 44.7514 )
 energy = 0.8
-script = ExtResource( 71 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Switch"]
+shape = SubResource( 26 )
+
+[node name="Sprite" type="Sprite" parent="Environment/Switch"]
+scale = Vector2( 0.0625, 0.0488281 )
+texture = ExtResource( 84 )
 
 [node name="Floor2" type="StaticBody2D" parent="Environment"]
 position = Vector2( 510, 581 )
@@ -391,7 +409,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -416,7 +434,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -603,6 +621,10 @@ color = Color( 1, 0.945098, 0.815686, 1 )
 script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
+[connection signal="_on_selected" from="Environment/Switch" to="." method="_on_furniture_selected"]
+[connection signal="input_event" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_input_event"]
+[connection signal="mouse_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_mouse_entered"]
+[connection signal="mouse_exited" from="Environment/Switch" to="." method="_on_mouse_exited"]
 [connection signal="input_event" from="Environment/Floor2" to="Environment/Entities/Player" method="_on_Floor2_input_event"]
 [connection signal="mouse_entered" from="Environment/Floor2" to="." method="_on_Floor_mouse_entered"]
 [connection signal="mouse_exited" from="Environment/Floor2" to="." method="_on_mouse_exited"]
@@ -656,7 +678,7 @@ clockNodePath = NodePath("../Time")
 [connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="." method="_on_mouse_exited"]
 [connection signal="mouse_exited" from="Environment/Entities/CoffeeTable/Coffee" to="Environment/Entities/CoffeeTable/Coffee" method="_on_Coffee_mouse_exited"]
 [connection signal="victory" from="TaskList/ItemsList" to="." method="_on_ItemsList_victory"]
-[connection signal="end_sunset" from="Time" to="Environment/Light2D4" method="_on_Time_end_sunset"]
+[connection signal="end_sunset" from="Time" to="Environment/Switch" method="_on_Time_end_sunset"]
 [connection signal="game_over" from="Time" to="." method="_on_Time_game_over"]
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="StressBar" method="_on_Countdown_timeout"]
