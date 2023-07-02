@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -92,6 +92,9 @@
 [ext_resource path="res://assets/textures/animations/window3.png" type="Texture" id=90]
 [ext_resource path="res://assets/textures/animations/window1.png" type="Texture" id=91]
 [ext_resource path="res://src/levels/Clock.gd" type="Script" id=92]
+[ext_resource path="res://src/levels/PostIt.gd" type="Script" id=93]
+[ext_resource path="res://assets/textures/environment/stars.png" type="Texture" id=94]
+[ext_resource path="res://src/levels/Stars.gd" type="Script" id=95]
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0.687688, 0.984985 )
@@ -190,6 +193,102 @@ shader_param/width = 8.0
 shader_param/pattern = 2
 shader_param/inside = false
 shader_param/add_margins = true
+
+[sub_resource type="Animation" id=29]
+resource_name = "highlight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.220497, 0.168509 ), Vector2( 0.4, 0.3 ), Vector2( 0.220497, 0.168509 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "shine"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 922.179, 360.371 ), Vector2( 911.179, 357.371 ), Vector2( 905.512, 365.038 ), Vector2( 901.179, 370.371 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.0375036, 0.0352857 ), Vector2( 0.09, 0.09 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -21.8, 47.0, 94.7, 174.1 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "shine"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 949, 372 ), Vector2( 959, 361 ), Vector2( 971, 368 ), Vector2( 977, 374 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.038, 0.035 ), Vector2( 0.09, 0.09 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -60.0, -134.1, -218.8, -229.4 ]
+}
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 173.317, 90.5192 )
@@ -431,6 +530,31 @@ texture = ExtResource( 8 )
 position = Vector2( 3.17969, -161.237 )
 scale = Vector2( 0.220497, 0.168509 )
 texture = ExtResource( 29 )
+script = ExtResource( 93 )
+
+[node name="PostItAnimation" type="AnimationPlayer" parent="Environment/Entities/Fridge/FridgeBody/PostIt"]
+anims/highlight = SubResource( 29 )
+
+[node name="Stars" type="Node" parent="Environment/Entities/Fridge/FridgeBody/PostIt"]
+script = ExtResource( 95 )
+
+[node name="Stars1" type="Sprite" parent="Environment/Entities/Fridge/FridgeBody/PostIt/Stars"]
+position = Vector2( 901.179, 370.371 )
+rotation = 3.03862
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 94 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/Fridge/FridgeBody/PostIt/Stars/Stars1"]
+anims/shine = SubResource( 30 )
+
+[node name="Stars2" type="Sprite" parent="Environment/Entities/Fridge/FridgeBody/PostIt/Stars"]
+position = Vector2( 977, 374 )
+rotation = -4.00379
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 94 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/Entities/Fridge/FridgeBody/PostIt/Stars/Stars2"]
+anims/shine = SubResource( 31 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Entities/Fridge"]
 position = Vector2( -1.59009, -164.066 )
@@ -526,7 +650,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 14
+frame = 26
 playing = true
 
 [node name="Child" parent="Environment/Entities" instance=ExtResource( 13 )]
@@ -680,6 +804,7 @@ position = Vector2( -1, 1 )
 script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
 
+[connection signal="task_finished" from="." to="Environment/Entities/Fridge/FridgeBody/PostIt" method="_on_Level01_task_finished"]
 [connection signal="_on_selected" from="Environment/Switch" to="." method="_on_furniture_selected"]
 [connection signal="body_entered" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_entered"]
 [connection signal="body_exited" from="Environment/Switch" to="Environment/Switch" method="_on_Switch_body_exited"]
