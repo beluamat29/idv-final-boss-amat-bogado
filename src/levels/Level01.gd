@@ -9,6 +9,7 @@ onready var coffeeTable = $Environment/Entities/CoffeeTable
 var SHOW_COFFE_VALUE = 40
 signal victory
 signal game_over
+signal task_finished
 var cursor_images: Array = []
 export var cursor_point: Texture
 export var cursor_inactive: Texture
@@ -37,12 +38,15 @@ func _on_GenericFurniture_task_finished(id):
 	objectWasPressed(id)
 	stress_bar._change_stress_bar(-10)
 	player.busy = false
-
+	print('pasando por aqiiii')
+	emit_signal("task_finished")
+	
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
 	if(value == SHOW_COFFE_VALUE):
 		coffeeTable.displayCoffee()
 		player.coffeIsAvailable()
+	
 
 func _on_Child_set_player_target():
 	player.set_target()
