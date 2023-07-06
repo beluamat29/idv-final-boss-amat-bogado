@@ -2,6 +2,7 @@ extends Area2D
 
 onready var light: Light2D = $Light2D4
 onready var shine: Light2D = $Light2D
+onready var sound: AudioStreamPlayer = $SwitchSound
 var can_turn_on: bool = false
 var selected: bool = false
 var body_entered: bool = false
@@ -10,6 +11,7 @@ signal _on_selected()
 
 func _process(delta):
 	if !light.is_visible_in_tree() && can_turn_on && selected && body_entered:
+		sound.play()
 		shine.hide()
 		light.show()
 		selected = false
