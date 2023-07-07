@@ -38,12 +38,11 @@ func _on_GenericFurniture_task_finished(id):
 	objectWasPressed(id)
 	stress_bar._change_stress_bar(-10)
 	player.busy = false
-	print('pasando por aqiiii')
 	emit_signal("task_finished")
 	
 func _on_StressBar_change_stress_signs(value: int):
 	player.change_stress_signs(value)
-	if(value == SHOW_COFFE_VALUE):
+	if(value >= SHOW_COFFE_VALUE):
 		coffeeTable.displayCoffee()
 		player.coffeIsAvailable()
 	
