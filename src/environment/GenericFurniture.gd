@@ -36,9 +36,7 @@ func _physics_process(delta):
 		task_in_progress = true
 		var sprite_position: Vector2 = sprite.position
 
-		#progress_bar.show()
-		#var progress_bar_position = Vector2(sprite_position.x, sprite_position.y - 300)
-		#progress_bar.set_position(progress_bar_position)
+		progress_bar.show()
 			
 func _on_GenericFurniture_body_entered(body):
 	body_entered = true
@@ -51,6 +49,7 @@ func _on_GenericFurniture_body_exited(body):
 		audio.stop()
 		toggleAnimation(false)
 		task_activated = false
+		progress_bar.hide()
 	body_entered = false
 
 func _on_GenericFurniture_input_event(viewport, event, shape_idx):

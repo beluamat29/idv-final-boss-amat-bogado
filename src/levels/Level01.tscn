@@ -420,7 +420,7 @@ tracks/0/keys = {
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 217.0, 338.0 ]
+"_edit_horizontal_guides_": [ 250.0, 338.0, 290.0 ]
 }
 cursor_point = ExtResource( 81 )
 cursor_inactive = ExtResource( 80 )
@@ -428,8 +428,11 @@ cursor_inactive = ExtResource( 80 )
 [node name="Background2" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 5.0
-margin_right = 5.0
+margin_left = -39.0
+margin_top = -3.0
+margin_right = -39.0
+margin_bottom = -3.0
+rect_pivot_offset = Vector2( 552, 266 )
 mouse_filter = 2
 texture = SubResource( 12 )
 expand = true
@@ -484,7 +487,7 @@ texture = ExtResource( 18 )
 position = Vector2( 1024, 301 )
 
 [node name="Window2" type="Sprite" parent="Environment"]
-position = Vector2( 321, 278 )
+position = Vector2( 321, 190 )
 scale = Vector2( 0.192383, 0.234375 )
 texture = ExtResource( 68 )
 script = ExtResource( 71 )
@@ -495,7 +498,7 @@ scale = Vector2( 1.07907, 1.09073 )
 frames = SubResource( 27 )
 
 [node name="Window" type="Sprite" parent="Environment"]
-position = Vector2( 566, 279 )
+position = Vector2( 566, 191 )
 scale = Vector2( 0.192383, 0.234375 )
 texture = ExtResource( 68 )
 script = ExtResource( 71 )
@@ -506,12 +509,12 @@ scale = Vector2( 1.07907, 1.09073 )
 frames = SubResource( 27 )
 
 [node name="Shelf" type="Sprite" parent="Environment"]
-position = Vector2( 122, 279 )
+position = Vector2( 123, 210 )
 scale = Vector2( 0.216797, 0.177734 )
 texture = ExtResource( 16 )
 
 [node name="Shelf2" type="Sprite" parent="Environment"]
-position = Vector2( 770, 258 )
+position = Vector2( 770, 214 )
 scale = Vector2( 0.283203, 0.234375 )
 texture = ExtResource( 65 )
 
@@ -571,12 +574,18 @@ genericFurnitureScene = ExtResource( 6 )
 
 [node name="Desk" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
 material = SubResource( 19 )
-position = Vector2( 126, 427 )
-id = null
+position = Vector2( 127, 427 )
 texture = ExtResource( 9 )
 tasks = [ "Asistir a reunion laboral" ]
 probability = 50
 sound = ExtResource( 20 )
+
+[node name="ProgressBar" parent="Environment/Entities/Furniture/Desk" index="1"]
+visible = false
+margin_left = -110.239
+margin_top = -373.96
+margin_right = -24.2393
+margin_bottom = -354.96
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Desk"]
 visible = false
@@ -589,7 +598,7 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -601,6 +610,13 @@ texture = ExtResource( 10 )
 tasks = [ "Preparar almuerzo" ]
 probability = 60
 sound = ExtResource( 24 )
+
+[node name="ProgressBar" parent="Environment/Entities/Furniture/Kitchen" index="1"]
+visible = false
+margin_left = -42.0
+margin_top = -361.0
+margin_right = 44.0
+margin_bottom = -343.0
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Kitchen"]
 visible = false
@@ -614,7 +630,7 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -623,9 +639,15 @@ position = Vector2( 271, 461 )
 scale = Vector2( 0.2, 0.2 )
 id = 3
 texture = ExtResource( 11 )
-tasks = null
 probability = 30
 sound = ExtResource( 25 )
+
+[node name="ProgressBar" parent="Environment/Entities/Furniture/Plant" index="1"]
+visible = false
+margin_left = -155.0
+margin_top = -910.0
+margin_right = 20.0002
+margin_bottom = -874.0
 
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/Plant"]
 visible = false
@@ -643,6 +665,15 @@ tasks = [ null ]
 probability = 70
 sound = ExtResource( 22 )
 
+[node name="ProgressBar" parent="Environment/Entities/Furniture/WashingMachine" index="1"]
+visible = false
+anchor_right = 0.532
+anchor_bottom = 0.492
+margin_left = -136.0
+margin_top = -676.0
+margin_right = 4.0
+margin_bottom = -649.0
+
 [node name="TaskFinishedSprite" type="Sprite" parent="Environment/Entities/Furniture/WashingMachine"]
 visible = false
 position = Vector2( 52, -336 )
@@ -655,7 +686,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 8
+frame = 4
 playing = true
 
 [node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
@@ -709,6 +740,9 @@ position = Vector2( 370, 451 )
 position = Vector2( 695, 409 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
+
+[node name="Thought" parent="Environment/Entities/Player" index="3"]
+visible = false
 
 [node name="TaskList" type="TextureRect" parent="."]
 visible = false
@@ -871,3 +905,9 @@ clockNodePath = NodePath("../Time")
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
 [connection signal="timeout" from="StressBar/Timer" to="StressBar" method="_on_Timer_timeout"]
+
+[editable path="Environment/Entities/Furniture/Desk"]
+[editable path="Environment/Entities/Furniture/Kitchen"]
+[editable path="Environment/Entities/Furniture/Plant"]
+[editable path="Environment/Entities/Furniture/WashingMachine"]
+[editable path="Environment/Entities/Player"]
