@@ -141,7 +141,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="DynamicFont" id=5]
-size = 32
+size = 40
 font_data = ExtResource( 16 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -187,14 +187,14 @@ position = Vector2( -307, -392 )
 texture = ExtResource( 15 )
 
 [node name="Label" type="Label" parent="Thought"]
-margin_left = -153.0
-margin_top = -144.0
-margin_right = 154.0
-margin_bottom = 75.0
+margin_left = -180.0
+margin_top = -165.0
+margin_right = 188.0
+margin_bottom = 78.0
 size_flags_stretch_ratio = 0.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Tengo que terminar las tareas que tengo anotadas en la heladera antes de que termine el dia"
+text = "Tengo que terminar mis tareas antes de que termine el dia, pero no recuerdo donde las anote..."
 align = 1
 autowrap = true
 

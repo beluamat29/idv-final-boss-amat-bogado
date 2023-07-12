@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
@@ -20,7 +20,6 @@
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=18]
 [ext_resource path="res://src/environment/Wall.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/sounds/typing.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/fonts/Baby Doll.otf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/sounds/washing-machine.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/textures/entities/clockbody.png" type="Texture" id=23]
 [ext_resource path="res://assets/sounds/cooking.wav" type="AudioStream" id=24]
@@ -402,10 +401,6 @@ shader_param/pattern = 2
 shader_param/inside = false
 shader_param/add_margins = true
 
-[sub_resource type="DynamicFont" id=5]
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 21 )
-
 [sub_resource type="Animation" id=28]
 resource_name = "highlight"
 loop = true
@@ -660,7 +655,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 7
+frame = 8
 playing = true
 
 [node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
@@ -725,15 +720,6 @@ mouse_filter = 2
 texture = ExtResource( 14 )
 expand = true
 script = ExtResource( 17 )
-
-[node name="Label" type="Label" parent="TaskList"]
-margin_left = 61.0
-margin_top = 47.0
-margin_right = 289.0
-margin_bottom = 63.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 5 )
-text = "Tengo que hacer estas tareas:"
 
 [node name="ItemsList" type="VBoxContainer" parent="TaskList"]
 margin_left = 58.0
