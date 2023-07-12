@@ -41,6 +41,7 @@ expand = true
 
 [node name="PausePopup" type="PopupMenu" parent="UI/Menus"]
 pause_mode = 2
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -73,7 +74,7 @@ margin_right = 152.0
 margin_bottom = 39.5
 custom_colors/font_color = Color( 0.92549, 0.85098, 0.25098, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Restart"
+text = "Reiniciar"
 
 [node name="Resume" type="TextureButton" parent="UI/Menus/PausePopup"]
 anchor_left = 0.5
@@ -88,13 +89,14 @@ rect_pivot_offset = Vector2( 94, 20.5 )
 texture_normal = ExtResource( 6 )
 
 [node name="Label" type="Label" parent="UI/Menus/PausePopup/Resume"]
-margin_left = 97.0
+margin_left = 91.0
 margin_top = 26.5
-margin_right = 148.0
+margin_right = 162.0
 margin_bottom = 40.5
 custom_colors/font_color = Color( 0.92549, 0.85098, 0.25098, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Resume"
+text = "Continuar"
+align = 1
 
 [node name="Exit" type="TextureButton" parent="UI/Menus/PausePopup"]
 anchor_left = 0.5
@@ -115,7 +117,7 @@ margin_right = 154.0
 margin_bottom = 37.5
 custom_colors/font_color = Color( 0.92549, 0.85098, 0.25098, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Exit"
+text = "Salir"
 align = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Menus/PausePopup"]
@@ -130,7 +132,7 @@ margin_bottom = -56.0
 theme = SubResource( 6 )
 custom_colors/default_color = Color( 0.92549, 0.85098, 0.25098, 1 )
 custom_fonts/normal_font = SubResource( 7 )
-text = "Paused"
+text = "Pausa"
 
 [node name="DefeatPopup" type="PopupMenu" parent="UI/Menus"]
 pause_mode = 2
@@ -205,7 +207,6 @@ text = "Defeat"
 
 [node name="VictoryPopup" type="PopupMenu" parent="UI/Menus"]
 pause_mode = 2
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
