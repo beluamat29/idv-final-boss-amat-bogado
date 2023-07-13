@@ -9,7 +9,7 @@ onready var coffeeTable = $Environment/Entities/CoffeeTable
 var SHOW_COFFE_VALUE = 40
 var hasDisplayedCoffee = false
 signal victory
-signal game_over
+signal game_over(text)
 signal task_finished
 var cursor_images: Array = []
 export var cursor_point: Texture
@@ -26,10 +26,10 @@ func _on_ItemsList_victory():
 	emit_signal("victory")
 
 func _on_Time_game_over():
-	emit_signal("game_over")
+	emit_signal("game_over", "Te quedaste sin tiempo")
 
 func _on_StressBar_game_over():
-	emit_signal("game_over")
+	emit_signal("game_over", "Perdiste la cordura")
 		
 func _on_GenericFurniture_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):

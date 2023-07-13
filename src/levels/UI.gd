@@ -39,8 +39,9 @@ func _on_player_win():
 	get_tree().paused = true
 	victory_menu.show()
 
-func _on_player_lose():
+func _on_player_lose(text):
 	get_tree().paused = true
+	defeat_menu.change_text(text)
 	defeat_menu.show()
 
 func _on_Exit_pressed():

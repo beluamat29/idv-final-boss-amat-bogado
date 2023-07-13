@@ -628,7 +628,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 2
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -660,7 +659,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 2
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -716,7 +714,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 1
+frame = 10
 playing = true
 
 [node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
@@ -927,7 +925,6 @@ script = ExtResource( 5 )
 [connection signal="change_stress_signs" from="StressBar" to="Environment/Entities/Player" method="change_stress_signs"]
 [connection signal="change_stress_signs" from="StressBar" to="TextureRect" method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
-[connection signal="stress_level_3" from="StressBar" to="TextureRect" method="_on_StressBar_stress_level_3"]
 
 [editable path="Environment/Entities/Furniture/Desk"]
 [editable path="Environment/Entities/Furniture/Kitchen"]
