@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/environment/thought-clouds.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/environment/coffee.png" type="Texture" id=2]
+[ext_resource path="res://src/entities/ThinkAboutCoffe.gd" type="Script" id=3]
+
+[node name="ThinkAboutCoffe" type="Sprite"]
+visible = false
+position = Vector2( -135, -237 )
+scale = Vector2( 0.322407, 0.337135 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 12.4067, -44.4926 )
+scale = Vector2( 0.55991, 0.485059 )
+texture = ExtResource( 2 )

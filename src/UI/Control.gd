@@ -11,6 +11,7 @@ export var eyes3: Texture
 
 signal game_over
 signal change_stress_signs(value)
+signal stress_level_3()
 	
 func _ready():
 	eyes.texture = eyes1
@@ -30,6 +31,7 @@ func _change_stress_bar(value) -> void:
 		if stress_bar.value >= 33 && stress_bar.value < 66 && eyes.texture != eyes2:
 			eyes.texture = eyes2
 		if stress_bar.value >= 66 && eyes.texture != eyes3:
+			emit_signal("stress_level_3")
 			eyes.texture = eyes3
 		
 	else:

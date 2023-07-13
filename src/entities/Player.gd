@@ -8,6 +8,7 @@ onready var eyes: Sprite = $Sprite/Eyes
 onready var with_baby:bool = false
 onready var canDrinkCoffee: bool = false
 onready var thought: Sprite = $Thought
+onready var think: Sprite = $Think
 onready var sfx_sound: AudioStreamPlayer = $SFX
 var velocity:Vector2 = Vector2.ZERO
 var stress_level:int = 1
@@ -109,7 +110,8 @@ func _on_task_in_progress(probability):
 func _on_Timer_timeout():
 	thought.hide()
 
-func coffeIsAvailable():
+func coffeIsAvailable(): 
+	think.show_thought("res://assets/textures/environment/coffee.png")
 	canDrinkCoffee = true
 
 func _on_Coffee_input_event(viewport, event, shape_idx):

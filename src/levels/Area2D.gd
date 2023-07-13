@@ -17,7 +17,8 @@ func _process(delta):
 		selected = false
 
 func _on_Switch_input_event(viewport, event, shape_idx):
-	selected = true
+	if (event is InputEventMouseButton && event.pressed && can_turn_on):
+		selected = true
 
 func _on_Time_end_sunset():
 	can_turn_on = true
