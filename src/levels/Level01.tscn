@@ -1,10 +1,9 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
-[ext_resource path="res://assets/textures/environment/full_bar.png" type="Texture" id=3]
+[ext_resource path="res://src/entities/StressBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/entities/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/textures/environment/empty_bar.png" type="Texture" id=5]
 [ext_resource path="res://src/environment/furniture/GenericFurniture.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Time.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=8]
@@ -14,7 +13,6 @@
 [ext_resource path="res://assets/textures/environment/furniture/washingmachine.png" type="Texture" id=12]
 [ext_resource path="res://src/entities/Child.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/textures/environment/thought-clouds.png" type="Texture" id=14]
-[ext_resource path="res://src/UI/Control.gd" type="Script" id=15]
 [ext_resource path="res://assets/textures/environment/furniture/shelf-1.png" type="Texture" id=16]
 [ext_resource path="res://src/UI/TaskList.gd" type="Script" id=17]
 [ext_resource path="res://assets/textures/environment/floor.png" type="Texture" id=18]
@@ -428,9 +426,9 @@ cursor_inactive = ExtResource( 80 )
 [node name="Background2" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -39.0
+margin_left = -4.0
 margin_top = -3.0
-margin_right = -39.0
+margin_right = -4.0
 margin_bottom = -3.0
 rect_pivot_offset = Vector2( 552, 266 )
 mouse_filter = 2
@@ -598,7 +596,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 3
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -630,7 +627,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 3
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -686,7 +682,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
-frame = 4
+frame = 20
 playing = true
 
 [node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
@@ -810,24 +806,11 @@ stream = ExtResource( 77 )
 autoplay = true
 bus = "Background"
 
-[node name="StressBar" type="Control" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 15 )
-stress_bar_path = NodePath("TextureProgress")
-
-[node name="TextureProgress" type="TextureProgress" parent="StressBar"]
-margin_left = 403.0
-margin_top = 6.0
-margin_right = 675.0
-margin_bottom = 28.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 3 )
-nine_patch_stretch = true
-
-[node name="Timer" type="Timer" parent="StressBar"]
-autostart = true
+[node name="StressBar" parent="." instance=ExtResource( 3 )]
+margin_left = 328.0
+margin_top = 5.0
+margin_right = 528.0
+margin_bottom = 44.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1, 1 )
@@ -903,11 +886,12 @@ clockNodePath = NodePath("../Time")
 [connection signal="timeout" from="Time/Countdown" to="Time" method="_on_Countdown_timeout"]
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
+[connection signal="change_stress_signs" from="StressBar" to="Environment/Entities/Player" method="change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
-[connection signal="timeout" from="StressBar/Timer" to="StressBar" method="_on_Timer_timeout"]
 
 [editable path="Environment/Entities/Furniture/Desk"]
 [editable path="Environment/Entities/Furniture/Kitchen"]
 [editable path="Environment/Entities/Furniture/Plant"]
 [editable path="Environment/Entities/Furniture/WashingMachine"]
 [editable path="Environment/Entities/Player"]
+[editable path="StressBar"]

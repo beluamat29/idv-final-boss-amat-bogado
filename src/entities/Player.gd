@@ -122,16 +122,16 @@ func drinkCoffee():
 		sfx_sound.play()
 	eyes.texture = eyes_front
 	sprite.play("drinking")
-	yield(get_tree().create_timer(6), "timeout")
-	drinking = false
-	finishCoffee()
 		
 func finishCoffee():
-	emit_signal("coffee_finished")
 	canDrinkCoffee = false
 	coffeeWasClicked = false
+	drinking = false
+	emit_signal("coffee_finished")
 
 	
 func _on_Coffee_body_entered(body):
 	if(canDrinkCoffee && coffeeWasClicked):
-		drinking = true
+		drinking = true 
+		yield(get_tree().create_timer(6), "timeout")
+		finishCoffee()
