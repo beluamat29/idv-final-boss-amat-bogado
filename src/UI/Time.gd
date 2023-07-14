@@ -1,7 +1,7 @@
 extends Node
 
 var tiempoTotal = 300 #segundos
-var TIME_ABOUT_TO_FINISH_HOUR = 21
+var TIME_ABOUT_TO_FINISH_HOUR = 22
 onready var pivotHours:Position2D = $PivotHours
 onready var pivotMinutes:Position2D = $PivotMinutes
 onready var music: AudioStreamPlayer = $Background
@@ -17,7 +17,7 @@ func checkIfTimeAboutToFinish():
 		music.timeAboutToFinish()
 		
 func _on_Countdown_timeout():
-	if(tiempoTotal < 660):
+	if(tiempoTotal < 720):
 		tiempoTotal += 1
 		if(_minutes() == 0):
 			pivotHours.rotation_degrees += 30

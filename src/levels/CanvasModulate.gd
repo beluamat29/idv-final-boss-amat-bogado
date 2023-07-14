@@ -1,6 +1,6 @@
 extends CanvasModulate
 
-const seconds_per_day:int = 30 * 23
+const seconds_per_day:int = 30 * 25
 const seconds_per_hour:int = 30
 
 export(float, 0, 1) var brightness_night = 0.3

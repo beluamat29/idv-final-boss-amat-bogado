@@ -1,9 +1,10 @@
-[gd_scene load_steps=119 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://src/levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/ItemList.gd" type="Script" id=2]
 [ext_resource path="res://src/entities/StressBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/entities/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/levels/TextureRect.gd" type="Script" id=5]
 [ext_resource path="res://src/environment/furniture/GenericFurniture.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Time.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/environment/furniture/fridge.png" type="Texture" id=8]
@@ -415,10 +416,41 @@ tracks/0/keys = {
 "values": [ Vector2( 0.35, 0.35 ), Vector2( 0.37, 0.37 ), Vector2( 0.35, 0.35 ) ]
 }
 
+[sub_resource type="Shader" id=34]
+code = "shader_type canvas_item;
+
+uniform int levels = 3;
+uniform float spread = 0.01;
+
+vec3 chromatic_slice(float t){
+	vec3 res = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+	return max(res, 0.0);
+}
+
+void fragment(){
+	vec3 sum;
+	COLOR.rgb = vec3(0);
+	vec2 offset = (UV - vec2(0.5))*vec2(1,-1);
+	for(int i = 0; i < levels; i++){
+		float t = 2.0*float(i)/float(levels-1); // range 0.0->2.0
+		vec3 slice = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+		slice = max(slice, 0.0);
+		sum += slice;
+		vec2 slice_offset = (t-1.0)*spread*offset;
+		COLOR.rgb += slice * texture(SCREEN_TEXTURE, SCREEN_UV + slice_offset).rgb;
+	}
+	COLOR.rgb /= sum;
+}"
+
+[sub_resource type="ShaderMaterial" id=35]
+shader = SubResource( 34 )
+shader_param/levels = 3
+shader_param/spread = 0.0
+
 [node name="Level01" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 250.0, 338.0, 290.0 ]
+"_edit_horizontal_guides_": [ 270.0, 338.0, 290.0 ]
 }
 cursor_point = ExtResource( 81 )
 cursor_inactive = ExtResource( 80 )
@@ -438,7 +470,7 @@ expand = true
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="Switch" type="Area2D" parent="Environment"]
-position = Vector2( 447, 289 )
+position = Vector2( 447, 283 )
 script = ExtResource( 85 )
 
 [node name="SwitchSound" type="AudioStreamPlayer" parent="Environment/Switch"]
@@ -485,7 +517,7 @@ texture = ExtResource( 18 )
 position = Vector2( 1024, 301 )
 
 [node name="Window2" type="Sprite" parent="Environment"]
-position = Vector2( 321, 190 )
+position = Vector2( 321, 210 )
 scale = Vector2( 0.192383, 0.234375 )
 texture = ExtResource( 68 )
 script = ExtResource( 71 )
@@ -496,7 +528,7 @@ scale = Vector2( 1.07907, 1.09073 )
 frames = SubResource( 27 )
 
 [node name="Window" type="Sprite" parent="Environment"]
-position = Vector2( 566, 191 )
+position = Vector2( 566, 210 )
 scale = Vector2( 0.192383, 0.234375 )
 texture = ExtResource( 68 )
 script = ExtResource( 71 )
@@ -596,7 +628,6 @@ visible = false
 position = Vector2( -2.44977, -150.588 )
 frames = SubResource( 10 )
 animation = "computer"
-frame = 1
 playing = true
 
 [node name="Kitchen" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -628,7 +659,6 @@ position = Vector2( -120.039, -326.273 )
 scale = Vector2( 0.469121, 0.40529 )
 frames = SubResource( 9 )
 animation = "smoke"
-frame = 1
 playing = true
 
 [node name="Plant" parent="Environment/Entities/Furniture" instance=ExtResource( 6 )]
@@ -684,6 +714,7 @@ position = Vector2( 59.4305, 58 )
 scale = Vector2( 2.35573, 2.32653 )
 frames = SubResource( 11 )
 animation = "washing"
+frame = 10
 playing = true
 
 [node name="CoffeeTable" type="Node2D" parent="Environment/Entities"]
@@ -737,9 +768,6 @@ position = Vector2( 370, 451 )
 position = Vector2( 695, 409 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
-
-[node name="Thought" parent="Environment/Entities/Player" index="3"]
-visible = false
 
 [node name="TaskList" type="TextureRect" parent="."]
 visible = false
@@ -814,9 +842,16 @@ margin_right = 528.0
 margin_bottom = 44.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2( -1, 1 )
+position = Vector2( -1, 0 )
 script = ExtResource( 69 )
 clockNodePath = NodePath("../Time")
+
+[node name="TextureRect" type="Sprite" parent="."]
+material = SubResource( 35 )
+position = Vector2( 501, 266 )
+scale = Vector2( -1.38265, -1.23917 )
+texture = ExtResource( 70 )
+script = ExtResource( 5 )
 
 [connection signal="task_finished" from="." to="Environment/Entities/Fridge/FridgeBody/PostIt" method="_on_Level01_task_finished"]
 [connection signal="_on_selected" from="Environment/Switch" to="." method="_on_furniture_selected"]
@@ -888,11 +923,11 @@ clockNodePath = NodePath("../Time")
 [connection signal="timeout" from="Time/Countdown" to="CanvasModulate" method="_on_Countdown_timeout"]
 [connection signal="change_stress_signs" from="StressBar" to="." method="_on_StressBar_change_stress_signs"]
 [connection signal="change_stress_signs" from="StressBar" to="Environment/Entities/Player" method="change_stress_signs"]
+[connection signal="change_stress_signs" from="StressBar" to="TextureRect" method="_on_StressBar_change_stress_signs"]
 [connection signal="game_over" from="StressBar" to="." method="_on_StressBar_game_over"]
 
 [editable path="Environment/Entities/Furniture/Desk"]
 [editable path="Environment/Entities/Furniture/Kitchen"]
 [editable path="Environment/Entities/Furniture/Plant"]
 [editable path="Environment/Entities/Furniture/WashingMachine"]
-[editable path="Environment/Entities/Player"]
 [editable path="StressBar"]

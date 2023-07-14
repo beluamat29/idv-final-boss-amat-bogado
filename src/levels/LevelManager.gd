@@ -24,8 +24,8 @@ func _setup_level():
 func _on_player_win():
 	ui._on_player_win()
 	
-func _on_player_lose():
-	ui._on_player_lose()
+func _on_player_lose(text):
+	ui._on_player_lose(text)
 
 func _on_UI_exit():
 	get_tree().change_scene("res://src/screens/MainMenu.tscn")

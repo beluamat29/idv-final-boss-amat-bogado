@@ -11,7 +11,7 @@ export var eyes3: Texture
 
 signal game_over
 signal change_stress_signs(value)
-	
+
 func _ready():
 	eyes.texture = eyes1
 	
